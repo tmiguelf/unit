@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30803.129
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unit", "unit\unit.vcxproj", "{D8852A28-85AD-4E28-8384-4B292467C1E4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "googletest", "submodules\googletest\googletest\googletest.vcxproj", "{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "googlemock", "submodules\googletest\googlemock\googlemock.vcxproj", "{D093761A-08DF-4A74-A0E3-F34DB77A2118}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathLib", "submodules\utilities\MathLib\MathLib.vcxproj", "{77943016-2D04-4451-96CB-9FDCBB6B9C8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+		WSL_Debug|x64 = WSL_Debug|x64
+		WSL_Release|x64 = WSL_Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8852A28-85AD-4E28-8384-4B292467C1E4}.Debug|x64.ActiveCfg = Debug|x64
+		{D8852A28-85AD-4E28-8384-4B292467C1E4}.Debug|x64.Build.0 = Debug|x64
+		{D8852A28-85AD-4E28-8384-4B292467C1E4}.Release|x64.ActiveCfg = Release|x64
+		{D8852A28-85AD-4E28-8384-4B292467C1E4}.Release|x64.Build.0 = Release|x64
+		{D8852A28-85AD-4E28-8384-4B292467C1E4}.WSL_Debug|x64.ActiveCfg = WSL_Debug|x64
+		{D8852A28-85AD-4E28-8384-4B292467C1E4}.WSL_Debug|x64.Build.0 = WSL_Debug|x64
+		{D8852A28-85AD-4E28-8384-4B292467C1E4}.WSL_Release|x64.ActiveCfg = WSL_Release|x64
+		{D8852A28-85AD-4E28-8384-4B292467C1E4}.WSL_Release|x64.Build.0 = WSL_Release|x64
+		{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}.Debug|x64.ActiveCfg = Debug|x64
+		{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}.Debug|x64.Build.0 = Debug|x64
+		{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}.Release|x64.ActiveCfg = Release|x64
+		{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}.Release|x64.Build.0 = Release|x64
+		{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}.WSL_Debug|x64.ActiveCfg = WSL_Debug|x64
+		{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}.WSL_Debug|x64.Build.0 = WSL_Debug|x64
+		{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}.WSL_Debug|x64.Deploy.0 = WSL_Debug|x64
+		{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}.WSL_Release|x64.ActiveCfg = WSL_Release|x64
+		{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}.WSL_Release|x64.Build.0 = WSL_Release|x64
+		{0DB6A04F-669B-47B3-9689-7B1A7F4C0943}.WSL_Release|x64.Deploy.0 = WSL_Release|x64
+		{D093761A-08DF-4A74-A0E3-F34DB77A2118}.Debug|x64.ActiveCfg = Debug|x64
+		{D093761A-08DF-4A74-A0E3-F34DB77A2118}.Debug|x64.Build.0 = Debug|x64
+		{D093761A-08DF-4A74-A0E3-F34DB77A2118}.Release|x64.ActiveCfg = Release|x64
+		{D093761A-08DF-4A74-A0E3-F34DB77A2118}.Release|x64.Build.0 = Release|x64
+		{D093761A-08DF-4A74-A0E3-F34DB77A2118}.WSL_Debug|x64.ActiveCfg = WSL_Debug|x64
+		{D093761A-08DF-4A74-A0E3-F34DB77A2118}.WSL_Debug|x64.Build.0 = WSL_Debug|x64
+		{D093761A-08DF-4A74-A0E3-F34DB77A2118}.WSL_Debug|x64.Deploy.0 = WSL_Debug|x64
+		{D093761A-08DF-4A74-A0E3-F34DB77A2118}.WSL_Release|x64.ActiveCfg = WSL_Release|x64
+		{D093761A-08DF-4A74-A0E3-F34DB77A2118}.WSL_Release|x64.Build.0 = WSL_Release|x64
+		{D093761A-08DF-4A74-A0E3-F34DB77A2118}.WSL_Release|x64.Deploy.0 = WSL_Release|x64
+		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.Debug|x64.ActiveCfg = Debug|x64
+		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.Debug|x64.Build.0 = Debug|x64
+		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.Release|x64.ActiveCfg = Release|x64
+		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.Release|x64.Build.0 = Release|x64
+		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.WSL_Debug|x64.ActiveCfg = WSL_Debug|x64
+		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.WSL_Debug|x64.Build.0 = WSL_Debug|x64
+		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.WSL_Debug|x64.Deploy.0 = WSL_Debug|x64
+		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.WSL_Release|x64.ActiveCfg = WSL_Release|x64
+		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.WSL_Release|x64.Build.0 = WSL_Release|x64
+		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.WSL_Release|x64.Deploy.0 = WSL_Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC449927-6C65-4275-9EEC-19D29C95317A}
+	EndGlobalSection
+EndGlobal

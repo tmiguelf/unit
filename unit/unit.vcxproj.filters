@@ -30,9 +30,6 @@
     <None Include="unit.include.props">
       <Filter>Export</Filter>
     </None>
-    <None Include="unit.import.props">
-      <Filter>Export</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\unit\unit.hpp">
@@ -104,10 +101,5 @@
     <ClInclude Include="include\unit\_p\unit_proxy.hpp">
       <Filter>Header Files\_p</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\unit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

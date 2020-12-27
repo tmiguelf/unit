@@ -1,0 +1,25 @@
+version: '{build}-{branch}'
+
+os: Visual Studio 2019 Preview
+
+install:
+    - wsl sudo sed --in-place 's/focal/groovy/g' /etc/apt/sources.list
+    - wsl sudo apt update
+    - wsl sudo apt install -y g++
+    - git submodule update --init --depth 1
+
+build: off
+
+build_script:
+    - msbuild /t:Build /p:Configuration=Release "./unit.sln" -maxcpucount
+    - msbuild /t:Build /p:Configuration=WSL_Release "./unit.sln" -maxcpucount
+
+test_script:
+    - '&"./Runtime/win_x64_Release/unit_test.exe" --gtest_output="xml:unit_result.xml"'
+    - wsl /mnt/c/projects/unit/Runtime/lin_x86_64_Release/unit_test.out --gtest_output="xml:unit_result_linux.xml"
+
+artifacts:
+  - path: unit_result.xml
+    name: test_results
+  - path: unit_result_linux.xml
+    name: test_results

@@ -27,6 +27,7 @@
 
 #pragma once
 
+#include "constants.hpp"
 #include "unit/_p/unit_id.hpp"
 
 namespace unit::standard
@@ -63,6 +64,17 @@ struct mile final: public lenght_standard
 struct nautical_mile final: public lenght_standard
 {
 	static constexpr long double gauge = 1852.l;
+};
+
+
+struct light_second: public lenght_standard
+{
+	static constexpr long double gauge = metric_speed_of_light;
+};
+
+struct light_year: public lenght_standard
+{
+	static constexpr long double gauge = metric_speed_of_light * 3600.l * 365.25l;
 };
 
 

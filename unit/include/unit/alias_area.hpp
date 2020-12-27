@@ -27,8 +27,7 @@
 
 #pragma once
 
-#include "standard/standard_charge.hpp"
-#include "standard/multipliers.hpp"
+#include "standard/standard_lenght.hpp"
 #include "standard/si_prefix.hpp"
 #include "_p/unit_type.hpp"
 
@@ -36,22 +35,33 @@ namespace unit
 {
 
 //======== ======== Template Type ======== ========
+template <_p::c_ValidFP T>
+using square_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<>>::type;
 
 template <_p::c_ValidFP T>
-using coloumb_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<>>::type;
+using square_foot_t = typename make_unit<T, std::tuple<_p::dimension<standard::foot, 2>>, std::tuple<>>::type;
 
 template <_p::c_ValidFP T>
-using amper_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<_p::scalar<multi::seconds_in_hour, 1>>>::type;
+using hectare_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<multi::hecto<2>>>::type;
 
 template <_p::c_ValidFP T>
-using milli_amper_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<multi::milli, _p::scalar<multi::seconds_in_hour, 1>>>::type;
+using acre_t = typename make_unit<T, std::tuple<_p::dimension<standard::yard, 2>>, std::tuple<_p::scalar<multi::square_yards_in_acre, 1>>::type;
 
+template <_p::c_ValidFP T>
+using square_mile_t = typename make_unit<T, std::tuple<_p::dimension<standard::mile, 2>>, std::tuple<>>::type;
+
+template <_p::c_ValidFP T>
+using square_kilo_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<multi::kilo<2>>>::type;
 
 //======== ======== Default Type ======== ========
 
-using coloumb			= coloumb_t			<_p::default_fp>;
+using square_metre	= square_metre_t<_p::default_fp>;
+using square_foot	= square_foot_t	<_p::default_fp>;
+using hectare		= hectare_t		<_p::default_fp>;
+using acre			= acre_t		<_p::default_fp>;
+using square_mile	= square_mile_t	<_p::default_fp>;
 
-using amper_hour		= amper_hour_t		<_p::default_fp>;
-using milli_amper_hour	= milli_amper_hour_t<_p::default_fp>;
+using square_kilo_metre	= square_kilo_metre_t<_p::default_fp>;
+
 
 } //namespace unit

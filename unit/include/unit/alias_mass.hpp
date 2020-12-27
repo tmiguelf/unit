@@ -28,6 +28,7 @@
 #pragma once
 
 #include "standard/standard_mass.hpp"
+#include "standard/si_prefix.hpp"
 #include "_p/unit_type.hpp"
 
 namespace unit
@@ -42,17 +43,22 @@ template <_p::c_ValidFP T>
 using gram_t = typename make_unit<T, std::tuple<_p::dimension<standard::gram, 1>>, std::tuple<>>::type;
 
 template <_p::c_ValidFP T>
-using pound_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound, 1>>, std::tuple<>>::type;
+using pound_av_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>>, std::tuple<>>::type;
 
 template <_p::c_ValidFP T>
-using ounce_t = typename make_unit<T, std::tuple<_p::dimension<standard::ounce, 1>>, std::tuple<>>::type;
+using ounce_av_t = typename make_unit<T, std::tuple<_p::dimension<standard::ounce_av, 1>>, std::tuple<>>::type;
 
+template <_p::c_ValidFP T>
+using tonne_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>>, std::tuple<_p::scalar<multi::E, 3>>>::type;
 
 //======== ======== Default Type ======== ========
 
 using kilogram	= kilogram_t<_p::default_fp>;
 using gram		= gram_t	<_p::default_fp>;
-using pound		= pound_t	<_p::default_fp>;
-using ounce		= ounce_t	<_p::default_fp>;
+using pound_av	= pound_av_t	<_p::default_fp>;
+using ounce_av	= ounce_av_t	<_p::default_fp>;
+using tonne		= tonne_t	<_p::default_fp>;
+
+
 
 } //namespace unit

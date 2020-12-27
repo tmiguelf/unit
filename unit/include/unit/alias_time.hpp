@@ -28,6 +28,7 @@
 #pragma once
 
 #include "standard/standard_time.hpp"
+#include "standard/si_prefix.hpp"
 #include "_p/unit_type.hpp"
 
 namespace unit
@@ -45,10 +46,30 @@ template <_p::c_ValidFP T>
 using hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::hour, 1>>, std::tuple<>>::type;
 
 
+template <_p::c_ValidFP T>
+using nano_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::second, 1>>, std::tuple<multi::nano<1>>>::type;
+
+template <_p::c_ValidFP T>
+using micro_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::second, 1>>, std::tuple<multi::micro<1>>>::type;
+
+template <_p::c_ValidFP T>
+using milli_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::second, 1>>, std::tuple<multi::milli<1>>>::type;
+
+
+template <_p::c_ValidFP T>
+using hertz_t = typename make_unit<T, std::tuple<_p::dimension<standard::second, -1>>, std::tuple<>>::type;
+
+
 //======== ======== Default Type ======== ========
 
 using second	= second_t	<_p::default_fp>;
 using minute	= minute_t	<_p::default_fp>;
 using hour		= hour_t	<_p::default_fp>;
+
+using nano_second	= nano_second_t	<_p::default_fp>;
+using micro_second	= micro_second_t<_p::default_fp>;
+using milli_second	= milli_second_t<_p::default_fp>;
+
+using hertz = hertz_t<_p::default_fp>;
 
 } //namespace unit

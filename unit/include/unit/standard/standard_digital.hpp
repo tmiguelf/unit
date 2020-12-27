@@ -32,34 +32,38 @@
 namespace unit::standard
 {
 
-struct mass_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::mass; };
+struct digital_info_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::digital_info; };
 
 
-struct si_mass final: public mass_standard
+struct bit final: public digital_info_standard
 {
 	static constexpr long double gauge = 1.l;
 };
 
-struct gram final: public mass_standard
+struct byte final: public digital_info_standard
 {
-	static constexpr long double gauge = .001l;
+	static constexpr long double gauge = 8.l;
 };
 
-struct pound_av final: public mass_standard
+struct doublet final: public digital_info_standard
 {
-	static constexpr long double gauge = 0.45359237l;
+	static constexpr long double gauge = byte::gauge * 2.l;
 };
 
-struct ounce_av final: public mass_standard
+struct quadlet final: public digital_info_standard
 {
-	static constexpr long double gauge = pound_av::gauge / 16.l;
+	static constexpr long double gauge = byte::gauge * 4.l;
 };
 
+struct octlet final: public digital_info_standard
+{
+	static constexpr long double gauge = byte::gauge * 8.l;
+};
 
 template<>
-struct SI_standard<::unit::_p::unit_id::mass>
+struct SI_standard<::unit::_p::unit_id::digital_info>
 {
-	using type = si_mass;
+	using type = bit;
 	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");
 };
 

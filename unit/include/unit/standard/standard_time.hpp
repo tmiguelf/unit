@@ -34,7 +34,6 @@ namespace unit::standard
 
 struct time_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::time; };
 
-
 struct second final: public time_standard
 {
 	static constexpr long double gauge = 1.l;
@@ -49,7 +48,6 @@ struct hour final: public time_standard
 {
 	static constexpr long double gauge = 3600.l;
 };
-
 
 template<>
 struct SI_standard<::unit::_p::unit_id::time>

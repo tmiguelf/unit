@@ -42,6 +42,7 @@ enum class unit_id: uint8_t
 	temperature,
 	luminous_intensity,
 	angle,
+	digital_info,
 };
 
 inline constexpr bool operator  < (unit_id p_1, unit_id p_2){ return static_cast<std::underlying_type_t<unit_id>>(p_1)  < static_cast<std::underlying_type_t<unit_id>>(p_2); }

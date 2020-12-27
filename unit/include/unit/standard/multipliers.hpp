@@ -27,16 +27,25 @@
 
 #pragma once
 
-namespace unit::scalar
+namespace unit::multi
 {
 
 struct E
 {
-	static constexpr long double factor = 10;
+	static constexpr long double factor = 10.l;
+};
+
+struct bi
+{
+	static constexpr long double factor = 1024.0l;
+};
+
+struct seconds_in_hour
+{
+	static constexpr long double factor = 3600.l;
 };
 
 
 
 
-
-} //namespace unit::scalar
+} //namespace unit::multi

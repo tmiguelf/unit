@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "googlemock", "submodules\go
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathLib", "submodules\utilities\MathLib\MathLib.vcxproj", "{77943016-2D04-4451-96CB-9FDCBB6B9C8C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unit_test", "unit\test\unit_test.vcxproj", "{C10A9437-6324-463C-B7B7-CF3A614364F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -57,6 +59,16 @@ Global
 		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.WSL_Release|x64.ActiveCfg = WSL_Release|x64
 		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.WSL_Release|x64.Build.0 = WSL_Release|x64
 		{77943016-2D04-4451-96CB-9FDCBB6B9C8C}.WSL_Release|x64.Deploy.0 = WSL_Release|x64
+		{C10A9437-6324-463C-B7B7-CF3A614364F7}.Debug|x64.ActiveCfg = Debug|x64
+		{C10A9437-6324-463C-B7B7-CF3A614364F7}.Debug|x64.Build.0 = Debug|x64
+		{C10A9437-6324-463C-B7B7-CF3A614364F7}.Release|x64.ActiveCfg = Release|x64
+		{C10A9437-6324-463C-B7B7-CF3A614364F7}.Release|x64.Build.0 = Release|x64
+		{C10A9437-6324-463C-B7B7-CF3A614364F7}.WSL_Debug|x64.ActiveCfg = WSL_Debug|x64
+		{C10A9437-6324-463C-B7B7-CF3A614364F7}.WSL_Debug|x64.Build.0 = WSL_Debug|x64
+		{C10A9437-6324-463C-B7B7-CF3A614364F7}.WSL_Debug|x64.Deploy.0 = WSL_Debug|x64
+		{C10A9437-6324-463C-B7B7-CF3A614364F7}.WSL_Release|x64.ActiveCfg = WSL_Release|x64
+		{C10A9437-6324-463C-B7B7-CF3A614364F7}.WSL_Release|x64.Build.0 = WSL_Release|x64
+		{C10A9437-6324-463C-B7B7-CF3A614364F7}.WSL_Release|x64.Deploy.0 = WSL_Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

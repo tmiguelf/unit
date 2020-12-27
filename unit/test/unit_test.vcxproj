@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{d8852a28-85ad-4e28-8384-4b292467c1e4}</ProjectGuid>
+    <ProjectGuid>{c10a9437-6324-463c-b7b7-cf3a614364f7}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -38,46 +38,25 @@
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)locations.props" />
     <Import Project="$(quickMSBuildPath)default.cpp.props" />
+    <Import Project="$(googletestPath)googletest.import.props" />
+    <Import Project="$(googlemockPath)googlemock.import.props" />
     <Import Project="$(MathLibPath)MathLib.include.props" />
+    <Import Project="$(ProjectDir)../unit.include.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup>
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
+    <Link>
+      <LibraryDependencies Condition="'$(TargetOS)'=='Linux'">pthread;%(LibraryDependencies)</LibraryDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\unit\alias_angle.hpp" />
-    <ClInclude Include="include\unit\alias_charge.hpp" />
-    <ClInclude Include="include\unit\alias_lenght.hpp" />
-    <ClInclude Include="include\unit\alias_luminosity.hpp" />
-    <ClInclude Include="include\unit\alias_mass.hpp" />
-    <ClInclude Include="include\unit\alias_temperature.hpp" />
-    <ClInclude Include="include\unit\alias_time.hpp" />
-    <ClInclude Include="include\unit\standard\constants.hpp" />
-    <ClInclude Include="include\unit\standard\multipliers.hpp" />
-    <ClInclude Include="include\unit\standard\standard_angle.hpp" />
-    <ClInclude Include="include\unit\standard\standard_charge.hpp" />
-    <ClInclude Include="include\unit\standard\standard_lenght.hpp" />
-    <ClInclude Include="include\unit\standard\standard_luminosity.hpp" />
-    <ClInclude Include="include\unit\standard\standard_mass.hpp" />
-    <ClInclude Include="include\unit\standard\standard_temperature.hpp" />
-    <ClInclude Include="include\unit\standard\standard_time.hpp" />
-    <ClInclude Include="include\unit\unit.hpp" />
-    <ClInclude Include="include\unit\_p\dimension.hpp" />
-    <ClInclude Include="include\unit\_p\metric_pack.hpp" />
-    <ClInclude Include="include\unit\_p\unit_id.hpp" />
-    <ClInclude Include="include\unit\_p\unit_proxy.hpp" />
-    <ClInclude Include="include\unit\_p\unit_type.hpp" />
-    <ClInclude Include="include\unit\_p\utils.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="unit.include.props" />
+    <ClCompile Include="src/unit_test.cpp" />
   </ItemGroup>
   <Import Project="$(quickMSBuildPath)default.cpp.targets" />
 </Project>

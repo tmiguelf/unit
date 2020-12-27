@@ -55,7 +55,9 @@ struct has_factor<Type, std::enable_if_t<std::is_same_v<decltype(Type::factor), 
 
 //A measurment standard requires a gauge, and must refer to a specific physical property
 template<typename T>
-concept c_standard = has_unit_id<T>::value && has_gauge<T>::value;
+constexpr bool is_standard_v = has_unit_id<T>::value && has_gauge<T>::value;
+template<typename T>
+concept c_standard = is_standard_v<T>;
 
 //A multiplier just needs to a value that can multiply
 template<typename T>

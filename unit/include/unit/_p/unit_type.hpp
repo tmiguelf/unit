@@ -61,11 +61,12 @@ public:
 	template<c_ValidFP Type2, c_unit_pack Pack2> requires
 		c_weak_compatible_unit_pack<unit_pack, typename Unit<Type2, Pack2>::unit_pack>
 	inline constexpr Unit(const Unit<Type2, Pack2>& p_other)
-		: m_value{metric_conversion<Type, unit_pack, typename std::remove_cvref_t<decltype(p_other)>::unit_pack>(p_other.value())}
+		: m_value{metric_conversion<Type, unit_pack, Pack2>(p_other.value())}
 	{}
 
 
 	//---- Operators ----
+	inline Unit& operator = (const Unit& p_other) = default;
 
 	inline Unit& operator += (const Unit& p_other)
 	{
@@ -110,7 +111,7 @@ public:
 		inline constexpr auto operator + (const Unit<Type2, Pack2>& p_other) const
 	{
 		using vtype = decltype(std::declval<Type>() + std::declval<Type2>());
-		return Unit<vtype, Pack>{m_value + metric_conversion<vtype, unit_pack, typename std::remove_cvref_t<decltype(p_other)>::unit_pack>(p_other.value())};
+		return Unit<vtype, Pack>{m_value + metric_conversion<vtype, unit_pack, Pack2>(p_other.value())};
 	}
 
 	inline constexpr Unit operator - (const Unit& p_other) const
@@ -131,7 +132,7 @@ public:
 		inline constexpr auto operator - (const Unit<Type2, Pack2>& p_other) const
 	{
 		using vtype = decltype(std::declval<Type>() - std::declval<Type2>());
-		return Unit<vtype, Pack>{m_value - metric_conversion<vtype, unit_pack, typename std::remove_cvref_t<decltype(p_other)>::unit_pack>(p_other.value())};
+		return Unit<vtype, Pack>{m_value - metric_conversion<vtype, unit_pack, Pack2>(p_other.value())};
 	}
 
 	template<c_arithmethic Type2>
@@ -186,8 +187,6 @@ public:
 
 	inline constexpr Unit operator -() { return -m_value; }
 	inline constexpr value_t value() const { return m_value; }
-
-
 
 
 	//TODO: Figure out how to implement this taking into consideration proper type promotion

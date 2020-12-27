@@ -32,66 +32,6 @@
 
 namespace unit::_p
 {
-/*
-template<c_tuple Tuple>
-struct is_dimension_colapsed
-{
-private:
-	static constexpr uintptr_t tuple_size = std::tuple_size_v<Tuple>;
-
-	template<uintptr_t Index = 0>
-	static constexpr bool check()
-	{
-		if constexpr(Index + 1 < tuple_size)
-		{
-			if constexpr(std::tuple_element_t<Index, Tuple>::id == std::tuple_element_t<Index + 1, Tuple>::id)
-			{
-				return false;
-			}
-			else
-			{
-				return check<Index + 1>();
-			}
-		}
-		else
-		{
-			return true;
-		}
-	}
-
-public:
-	static constexpr bool value = check();
-};
-
-template<c_tuple Tuple>
-struct is_scalar_colapsed
-{
-private:
-	static constexpr uintptr_t tuple_size = std::tuple_size_v<Tuple>;
-
-	template<uintptr_t Index = 0>
-	static constexpr bool check()
-	{
-		if constexpr(Index + 1 < tuple_size)
-		{
-			if constexpr(std::tuple_element_t<Index, Tuple>::base_factor == std::tuple_element_t<Index + 1, Tuple>::base_factor)
-			{
-				return false;
-			}
-			else
-			{
-				return check<Index + 1>();
-			}
-		}
-		else
-		{
-			return true;
-		}
-	}
-public:
-	static constexpr bool value = check();
-};
-*/
 
 /// \brief stores information about the unit
 template<c_tuple Dimensions, c_tuple Scalars>

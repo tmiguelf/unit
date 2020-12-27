@@ -29,8 +29,8 @@
 
 #include "standard/standard_temperature.hpp"
 #include "_p/unit_type.hpp"
+#include "_p/unit_proxy.hpp"
 
-//TODO: Celcius and Farenheit
 namespace unit
 {
 
@@ -42,10 +42,18 @@ using kelvin_t = typename make_unit<T, std::tuple<_p::dimension<standard::kelvin
 template <_p::c_ValidFP T>
 using rankine_t = typename make_unit<T, std::tuple<_p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
 
+template <_p::c_ValidFP T>
+using celcius_t = _p::Unit_proxy<T, standard::celcius>;
+
+template <_p::c_ValidFP T>
+using fahrenheit_t = _p::Unit_proxy<T, standard::fahrenheit>;
 
 //======== ======== Default Type ======== ========
 
 using kelvin	= kelvin_t	<_p::default_fp>;
 using rankine	= rankine_t	<_p::default_fp>;
+
+using celcius		= celcius_t		<_p::default_fp>;
+using fahrenheit	= fahrenheit_t	<_p::default_fp>;
 
 } //namespace unit

@@ -52,4 +52,17 @@ struct SI_standard<::unit::_p::unit_id::temperature>
 	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");
 };
 
+
+struct celcius final
+{
+	using standard_t = kelvin;
+	static constexpr long double offset = 273.15l;
+};
+
+struct fahrenheit final
+{
+	using standard_t = rankine;
+	static constexpr long double offset = 459.67l;
+};
+
 } //namespace unit::standard

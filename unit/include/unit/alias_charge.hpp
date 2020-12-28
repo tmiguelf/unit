@@ -44,7 +44,7 @@ template <_p::c_ValidFP T>
 using amper_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<_p::scalar<multi::seconds_in_hour, 1>>>::type;
 
 template <_p::c_ValidFP T>
-using milli_amper_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<multi::milli, _p::scalar<multi::seconds_in_hour, 1>>>::type;
+using milli_amper_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<multi::milli<1>, _p::scalar<multi::seconds_in_hour, 1>>>::type;
 
 
 //======== ======== Default Type ======== ========

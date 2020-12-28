@@ -40,11 +40,6 @@ namespace unit
 
 namespace multi
 {
-struct square_yards_in_acre
-{
-	static constexpr long double factor = 4840.l;
-};
-
 struct cubic_metres_in_gallon
 {
 	static constexpr long double factor = 4.546'09E-3l;

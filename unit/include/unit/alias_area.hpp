@@ -34,6 +34,14 @@
 namespace unit
 {
 
+namespace multi
+{
+struct square_yards_in_acre
+{
+	static constexpr long double factor = 4840.l;
+};
+} // namespace multi
+
 //======== ======== Template Type ======== ========
 template <_p::c_ValidFP T>
 using square_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<>>::type;
@@ -45,7 +53,7 @@ template <_p::c_ValidFP T>
 using hectare_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<multi::hecto<2>>>::type;
 
 template <_p::c_ValidFP T>
-using acre_t = typename make_unit<T, std::tuple<_p::dimension<standard::yard, 2>>, std::tuple<_p::scalar<multi::square_yards_in_acre, 1>>::type;
+using acre_t = typename make_unit<T, std::tuple<_p::dimension<standard::yard, 2>>, std::tuple<_p::scalar<multi::square_yards_in_acre, 1>>>::type;
 
 template <_p::c_ValidFP T>
 using square_mile_t = typename make_unit<T, std::tuple<_p::dimension<standard::mile, 2>>, std::tuple<>>::type;

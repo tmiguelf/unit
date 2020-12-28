@@ -37,6 +37,10 @@
 namespace unit::_p
 {
 
+template<c_ValidFP Type, c_proxy_property Property>
+class Unit_proxy;
+
+
 template<c_ValidFP Type, c_unit_pack Pack>
 class Unit
 {
@@ -64,9 +68,21 @@ public:
 		: m_value{metric_conversion<Type, unit_pack, Pack2>(p_other.value())}
 	{}
 
+	template<c_ValidFP Type2, c_proxy_property Prop2> requires
+		(is_compatible_unit_pack<unit_pack, typename Unit_proxy<Type2, Prop2>::unit_pack_t>::value)
+	inline constexpr Unit(const Unit_proxy<Type2, Prop2>& p_other)
+		: Unit(p_other.to_unit())
+	{}
 
 	//---- Operators ----
-	inline Unit& operator = (const Unit& p_other) = default;
+	inline Unit& operator = (const Unit&) = default;
+
+	template<c_ValidFP Type2, c_proxy_property Prop2> requires
+		(is_compatible_unit_pack<unit_pack, typename Unit_proxy<Type2, Prop2>::unit_pack_t>::value)
+	inline Unit& operator = (const Unit_proxy<Type2, Prop2>& p_other)
+	{
+		return operator = (p_other.to_unit());
+	}
 
 	inline Unit& operator += (const Unit& p_other)
 	{
@@ -100,7 +116,7 @@ public:
 
 	template <c_ValidFP Type2, c_unit_pack Pack2> requires
 		c_interchangeable_unit_pack<unit_pack, typename Unit<Type2, Pack2>::unit_pack>
-		inline constexpr auto operator + (const Unit<Type2, Pack2>& p_other) const
+	inline constexpr auto operator + (const Unit<Type2, Pack2>& p_other) const
 	{
 		using vtype = decltype(std::declval<Type>() + std::declval<Type2>());
 		return Unit<vtype, Pack>{m_value + p_other.value()};
@@ -108,7 +124,7 @@ public:
 
 	template <c_ValidFP Type2, c_unit_pack Pack2> requires
 		c_weak_compatible_unit_pack<unit_pack, typename Unit<Type2, Pack2>::unit_pack>
-		inline constexpr auto operator + (const Unit<Type2, Pack2>& p_other) const
+	inline constexpr auto operator + (const Unit<Type2, Pack2>& p_other) const
 	{
 		using vtype = decltype(std::declval<Type>() + std::declval<Type2>());
 		return Unit<vtype, Pack>{m_value + metric_conversion<vtype, unit_pack, Pack2>(p_other.value())};
@@ -121,7 +137,7 @@ public:
 
 	template <c_ValidFP Type2, c_unit_pack Pack2> requires
 		c_interchangeable_unit_pack<unit_pack, typename Unit<Type2, Pack2>::unit_pack>
-		inline constexpr auto operator - (const Unit<Type2, Pack2>& p_other) const
+	inline constexpr auto operator - (const Unit<Type2, Pack2>& p_other) const
 	{
 		using vtype = decltype(std::declval<Type>() - std::declval<Type2>());
 		return Unit<vtype, Pack>{m_value - p_other.value()};
@@ -129,7 +145,7 @@ public:
 
 	template <c_ValidFP Type2, c_unit_pack Pack2> requires
 		c_weak_compatible_unit_pack<unit_pack, typename Unit<Type2, Pack2>::unit_pack>
-		inline constexpr auto operator - (const Unit<Type2, Pack2>& p_other) const
+	inline constexpr auto operator - (const Unit<Type2, Pack2>& p_other) const
 	{
 		using vtype = decltype(std::declval<Type>() - std::declval<Type2>());
 		return Unit<vtype, Pack>{m_value - metric_conversion<vtype, unit_pack, Pack2>(p_other.value())};

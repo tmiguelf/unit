@@ -32,18 +32,9 @@
 namespace unit::_p
 {
 
-template <typename, typename = void>
-struct has_offset: std::false_type {};
-template <typename Type>
-struct has_offset<Type, std::enable_if_t<std::is_same_v<decltype(Type::offset), const long double>, void>>: std::true_type {};
+template<c_ValidFP Type, c_unit_pack Pack>
+class Unit;
 
-template <typename, typename = void>
-struct has_standard: std::false_type {};
-template <typename Type>
-struct has_standard<Type, std::enable_if_t<is_standard_v<typename Type::standard_t>, void>>: std::true_type {};
-
-template<typename T>
-concept c_proxy_property = has_factor<T>::value;
 
 template<c_ValidFP Type, c_proxy_property Property>
 class Unit_proxy
@@ -51,11 +42,11 @@ class Unit_proxy
 public:
 	using value_t		= Type;
 	using prop_t		= Property;
-	using standard_t	= Property::standard_t;
+	using standard_t	= typename Property::standard_t;
 	using unit_pack_t	= unit_pack<std::tuple<dimension<standard_t, 1>>, std::tuple<>>;
 
 public:
-	static constexpr long double offset() { return Property::offset; }
+	static constexpr value_t offset() { return static_cast<value_t>(Property::offset); }
 
 public:
 
@@ -88,6 +79,7 @@ public:
 	inline constexpr Unit_proxy(const Unit_proxy<Type2, Prop2>& p_other)
 		: Unit_proxy(p_other.to_unit())
 	{}
+
 
 	//---- Operators ----
 	inline Unit_proxy& operator = (const Unit_proxy& p_other) = default;
@@ -162,10 +154,13 @@ public:
 
 	inline constexpr operator Unit<value_t, unit_pack_t>() const
 	{
-		return m_value + offset();
+		return to_unit();
 	}
 
-	inline constexpr Unit<value_t, unit_pack_t> to_unit() const { return operator Unit<value_t, unit_pack_t>(); }
+	inline constexpr Unit<value_t, unit_pack_t> to_unit() const
+	{
+		return m_value + offset();
+	}
 	inline constexpr value_t value() const { return m_value; }
 
 private:

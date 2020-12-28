@@ -80,40 +80,6 @@ public:
 };
 
 
-/// \brief Filter out specific types in tuple
-/*
-template<template <typename> typename Predicate, c_tuple Tuple>
-struct tuple_filter
-{
-private:
-	static constexpr uintptr_t tuple_size = std::tuple_size_v<Tuple>;
-
-	template<typename Acumulated = std::tuple<>, uintptr_t Index = 0>
-	static constexpr auto filter()
-	{
-		if constexpr(Index < tuple_size)
-		{
-			using NthType = typename std::tuple_element<Index, Tuple>::type;
-
-			if constexpr(Predicate<NthType>::value)
-			{
-				return filter<decltype(std::tuple_cat(std::declval<Acumulated>(), std::declval<std::tuple<NthType>>())), Index + 1>();
-			}
-			else
-			{
-				return filter<Acumulated, Index + 1>();
-			}
-		}
-		else
-		{
-			return Acumulated{};
-		}
-	}
-public:
-	using type = decltype(filter());
-};
-*/
-
 /// \brief Transforms all types in a tuble in acordance to a transformation template
 /// \tparam Transformation - Transformation template
 /// \tparam Tuple - tuple to transform
@@ -251,7 +217,6 @@ private:
 public:
 	using type = typename tuple_selection_sort_impl<0, 1, std::tuple_size<Tuple>::value, Tuple>::type;
 };
-
 
 
 /// \brief checks if types in a tuple are strictly sorted (i.e sorted with no repeated elements)

@@ -33,26 +33,13 @@
 namespace unit::multi
 {
 
-template<int8_t rank> using yotta	= _p::scalar<E, 24 * rank>;
-template<int8_t rank> using zetta	= _p::scalar<E, 21 * rank>;
-template<int8_t rank> using exa		= _p::scalar<E, 18 * rank>;
-template<int8_t rank> using peta	= _p::scalar<E, 15 * rank>;
-template<int8_t rank> using tera	= _p::scalar<E, 12 * rank>;
-template<int8_t rank> using giga	= _p::scalar<E,  9 * rank>;
-template<int8_t rank> using mega	= _p::scalar<E,  6 * rank>;
-template<int8_t rank> using kilo	= _p::scalar<E,  3 * rank>;
-template<int8_t rank> using hecto	= _p::scalar<E,  2 * rank>;
-template<int8_t rank> using deca	= _p::scalar<E,  1 * rank>;
-
-template<int8_t rank> using deci	= _p::scalar<E, - 1 * rank>;
-template<int8_t rank> using centi	= _p::scalar<E, - 2 * rank>;
-template<int8_t rank> using milli	= _p::scalar<E, - 3 * rank>;
-template<int8_t rank> using micro	= _p::scalar<E, - 6 * rank>;
-template<int8_t rank> using nano	= _p::scalar<E, - 9 * rank>;
-template<int8_t rank> using pico	= _p::scalar<E, -12 * rank>;
-template<int8_t rank> using femto	= _p::scalar<E, -15 * rank>;
-template<int8_t rank> using atto	= _p::scalar<E, -18 * rank>;
-template<int8_t rank> using zepto	= _p::scalar<E, -21 * rank>;
-template<int8_t rank> using yocto	= _p::scalar<E, -24 * rank>;
+template<int8_t rank> using yobi = _p::scalar<bi, 24 * rank>;
+template<int8_t rank> using zebi = _p::scalar<bi, 21 * rank>;
+template<int8_t rank> using exbi = _p::scalar<bi, 18 * rank>;
+template<int8_t rank> using pebi = _p::scalar<bi, 15 * rank>;
+template<int8_t rank> using tebi = _p::scalar<bi, 12 * rank>;
+template<int8_t rank> using gibi = _p::scalar<bi,  9 * rank>;
+template<int8_t rank> using mebi = _p::scalar<bi,  6 * rank>;
+template<int8_t rank> using kibi = _p::scalar<bi,  3 * rank>;
 
 } //namespace unit::multi

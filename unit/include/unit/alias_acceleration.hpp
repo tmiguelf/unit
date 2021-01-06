@@ -28,14 +28,24 @@
 #pragma once
 
 #include "_p/unit_type.hpp"
+#include "standard/standard_lenght.hpp"
+#include "standard/standard_time.hpp"
 
 namespace unit
 {
 
 //======== ======== Template Type ======== ========
 
+template <_p::c_ValidFP T>
+using metre_per_second_squared_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;
+
+template <_p::c_ValidFP T>
+using foot_per_second_squared_t = typename make_unit<T, std::tuple<_p::dimension<standard::foot, 1>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;
+
 
 //======== ======== Default Type ======== ========
 
+using metre_per_second_squared	= metre_per_second_squared_t<_p::default_fp>;
+using foot_per_second_squared	= foot_per_second_squared_t	<_p::default_fp>;
 
 } //namespace unit

@@ -62,7 +62,8 @@
     <ClInclude Include="include\unit\alias_digital.hpp" />
     <ClInclude Include="include\unit\alias_electrical.hpp" />
     <ClInclude Include="include\unit\alias_energy.hpp" />
-    <ClInclude Include="include\unit\alias_flow.hpp" />
+    <ClInclude Include="include\unit\alias_flow_mass.hpp" />
+    <ClInclude Include="include\unit\alias_flow_volume.hpp" />
     <ClInclude Include="include\unit\alias_force.hpp" />
     <ClInclude Include="include\unit\alias_lenght.hpp" />
     <ClInclude Include="include\unit\alias_luminosity.hpp" />

@@ -28,14 +28,37 @@
 #pragma once
 
 #include "_p/unit_type.hpp"
+#include "standard/standard_lenght.hpp"
+#include "standard/standard_time.hpp"
+#include "standard/si_prefix.hpp"
 
 namespace unit
 {
 
 //======== ======== Template Type ======== ========
 
+template <_p::c_ValidFP T>
+using metre_per_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>, _p::dimension<standard::second, -1>>, std::tuple<>>::type;
+
+template <_p::c_ValidFP T>
+using foot_per_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::foot, 1>, _p::dimension<standard::second, -1>>, std::tuple<>>::type;
+
+template <_p::c_ValidFP T>
+using kilometre_per_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>, _p::dimension<standard::hour, -1>>, std::tuple<multi::kilo<1>>>::type;
+
+template <_p::c_ValidFP T>
+using mile_per_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::mile, 1>, _p::dimension<standard::hour, -1>>, std::tuple<>>::type;
+
+template <_p::c_ValidFP T>
+using knot_t = typename make_unit<T, std::tuple<_p::dimension<standard::nautical_mile, 1>, _p::dimension<standard::hour, -1>>, std::tuple<>>::type;
+
 
 //======== ======== Default Type ======== ========
 
+using metre_per_second		= metre_per_second_t	<_p::default_fp>;
+using foot_per_second		= foot_per_second_t		<_p::default_fp>;
+using kilometre_per_hour	= kilometre_per_hour_t	<_p::default_fp>;
+using mile_per_hour			= mile_per_hour_t		<_p::default_fp>;
+using knot					= knot_t				<_p::default_fp>;
 
 } //namespace unit

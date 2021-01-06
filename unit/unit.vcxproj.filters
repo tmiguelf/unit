@@ -140,9 +140,6 @@
     <ClInclude Include="include\unit\alias_density.hpp">
       <Filter>Header Files\alias</Filter>
     </ClInclude>
-    <ClInclude Include="include\unit\alias_flow.hpp">
-      <Filter>Header Files\alias</Filter>
-    </ClInclude>
     <ClInclude Include="include\unit\alias_torque.hpp">
       <Filter>Header Files\alias</Filter>
     </ClInclude>
@@ -154,6 +151,12 @@
     </ClInclude>
     <ClInclude Include="include\unit\standard\digital_prefix.hpp">
       <Filter>Header Files\standard</Filter>
+    </ClInclude>
+    <ClInclude Include="include\unit\alias_flow_volume.hpp">
+      <Filter>Header Files\alias</Filter>
+    </ClInclude>
+    <ClInclude Include="include\unit\alias_flow_mass.hpp">
+      <Filter>Header Files\alias</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

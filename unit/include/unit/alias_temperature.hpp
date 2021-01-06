@@ -48,6 +48,7 @@ using celcius_t = _p::Unit_proxy<T, standard::celcius>;
 template <_p::c_ValidFP T>
 using fahrenheit_t = _p::Unit_proxy<T, standard::fahrenheit>;
 
+
 //======== ======== Default Type ======== ========
 
 using kelvin	= kelvin_t	<_p::default_fp>;

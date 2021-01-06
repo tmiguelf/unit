@@ -32,9 +32,6 @@
 #include "_p/unit_type.hpp"
 
 
-
-
-
 namespace unit
 {
 

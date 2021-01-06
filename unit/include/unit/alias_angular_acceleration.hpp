@@ -28,14 +28,21 @@
 #pragma once
 
 #include "_p/unit_type.hpp"
+#include "standard/standard_angle.hpp"
+#include "standard/standard_time.hpp"
 
 namespace unit
 {
 
 //======== ======== Template Type ======== ========
+template <_p::c_ValidFP T>
+using radian_per_second_square_t = typename make_unit<T, std::tuple<_p::dimension<standard::radian, 1>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;
 
+template <_p::c_ValidFP T>
+using turn_per_second_square_t = typename make_unit<T, std::tuple<_p::dimension<standard::turn, 1>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;
 
 //======== ======== Default Type ======== ========
-
+using radian_per_second_square = radian_per_second_square_t<_p::default_fp>;
+using turn_per_second_square = turn_per_second_square_t<_p::default_fp>;
 
 } //namespace unit

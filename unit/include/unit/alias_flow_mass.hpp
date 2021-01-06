@@ -27,35 +27,25 @@
 
 #pragma once
 
-namespace unit::multi
+#include "_p/unit_type.hpp"
+#include "standard/standard_mass.hpp"
+#include "standard/standard_time.hpp"
+
+namespace unit
 {
 
-struct E
-{
-	static constexpr long double factor = 10.l;
-};
+//======== ======== Template Type ======== ========
 
-struct g0
-{
-	static constexpr long double factor = 9.80665l;
-};
+template <_p::c_ValidFP T>
+using kilogram_per_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::second, -1>>, std::tuple<>>::type;
 
-struct bi
-{
-	static constexpr long double factor = 1024.0l;
-};
-
-struct seconds_in_hour
-{
-	static constexpr long double factor = 3600.l;
-};
-
-struct inches_in_meter
-{
-	static constexpr long double factor = 1.l / .0254l;
-};
+template <_p::c_ValidFP T>
+using pound_av_per_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::second, -1>>, std::tuple<>>::type;
 
 
+//======== ======== Default Type ======== ========
 
+using kilogram_per_second = kilogram_per_second_t<_p::default_fp>;
+using pound_av_per_second = pound_av_per_second_t<_p::default_fp>;
 
-} //namespace unit::multi
+} //namespace unit

@@ -28,7 +28,24 @@
 #pragma once
 
 #include "_p/unit_type.hpp"
+#include "standard/standard_mass.hpp"
+#include "standard/standard_lenght.hpp"
+
 
 namespace unit
 {
+//======== ======== Template Type ======== ========
+
+template <_p::c_ValidFP T>
+using kilogram_per_cubic_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -3>>, std::tuple<>>::type;
+
+template <_p::c_ValidFP T>
+using pound_av_per_cubic_feet_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::foot, -3>>, std::tuple<>>::type;
+
+
+//======== ======== Default Type ======== ========
+
+using kilogram_per_cubic_metre = kilogram_per_cubic_metre_t<_p::default_fp>;
+using pound_av_per_cubic_feet = pound_av_per_cubic_feet_t<_p::default_fp>;
+
 } //namespace unit

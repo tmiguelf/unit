@@ -35,9 +35,14 @@ struct E
 	static constexpr long double factor = 10.l;
 };
 
-struct g0
+struct g0_si
 {
 	static constexpr long double factor = 9.80665l;
+};
+
+struct g0_imp
+{
+	static constexpr long double factor = 32.17405l;
 };
 
 struct bi

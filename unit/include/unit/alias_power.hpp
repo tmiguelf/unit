@@ -31,13 +31,18 @@
 #include "standard/standard_mass.hpp"
 #include "standard/standard_lenght.hpp"
 #include "standard/standard_time.hpp"
-#include "standard/si_prefix.hpp"
 
 namespace unit
 {
 
 //======== ======== Template Type ======== ========
 
+template <_p::c_ValidFP T>
+using watt_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, -3>>, std::tuple<>>::type;
+
+
 //======== ======== Default Type ======== ========
+
+using watt = watt_t<_p::default_fp>;
 
 } //namespace unit

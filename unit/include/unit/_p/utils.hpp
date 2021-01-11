@@ -80,7 +80,7 @@ public:
 };
 
 
-/// \brief Transforms all types in a tuble in acordance to a transformation template
+/// \brief Transforms all types in a tuple in acordance to a transformation template
 /// \tparam Transformation - Transformation template
 /// \tparam Tuple - tuple to transform
 template<template <typename> typename Transformation, c_tuple Tuple>

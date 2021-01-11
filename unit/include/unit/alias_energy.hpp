@@ -28,14 +28,31 @@
 #pragma once
 
 #include "_p/unit_type.hpp"
+#include "standard/standard_mass.hpp"
+#include "standard/standard_lenght.hpp"
+#include "standard/standard_time.hpp"
+#include "standard/si_prefix.hpp"
+#include "standard/multipliers.hpp"
 
 namespace unit
 {
 
 //======== ======== Template Type ======== ========
+template <_p::c_ValidFP T>
+using joule_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;
+
+template <_p::c_ValidFP T>
+using watt_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::seconds_in_hour, 1>>>::type;
+
+template <_p::c_ValidFP T>
+using kilo_watt_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::seconds_in_hour, 1>, multi::kilo<1>>>::type;
 
 
 //======== ======== Default Type ======== ========
+
+using joule				= joule_t			<_p::default_fp>;
+using watt_hour			= watt_hour_t		<_p::default_fp>;
+using kilo_watt_hour	= kilo_watt_hour_t	<_p::default_fp>;
 
 
 } //namespace unit

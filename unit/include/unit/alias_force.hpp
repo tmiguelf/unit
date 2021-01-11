@@ -42,10 +42,10 @@ template <_p::c_ValidFP T>
 using newton_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 1>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;
 
 template <_p::c_ValidFP T>
-using kilogram_force_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::g0, 1>>>::type;
+using kilogram_force_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::g0_si, 1>>>::type;
 
 template <_p::c_ValidFP T>
-using pound_av_force_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::metre, 1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::g0, 1>>>::type;
+using pound_av_force_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::foot, 1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::g0_imp, 1>>>::type;
 
 template <_p::c_ValidFP T>
 using poundal_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::foot, 1>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;

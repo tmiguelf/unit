@@ -67,7 +67,7 @@ template <_p::c_ValidFP T>
 using bar_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::E, 5>>>::type;
 
 template <_p::c_ValidFP T>
-using pound_av_force_per_square_inch_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::inch, -1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::g0, 1>, _p::scalar<multi::inches_in_meter, 1>>>::type;
+using pound_av_force_per_square_inch_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::inch, -1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::g0_si, 1>, _p::scalar<multi::inches_in_meter, 1>>>::type;
 
 template <_p::c_ValidFP T>
 using inch_mercury32_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::inch_mercury32_factor, 1>>>::type;

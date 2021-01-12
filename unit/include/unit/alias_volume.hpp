@@ -27,34 +27,52 @@
 
 #pragma once
 
-#include "standard/standard_temperature.hpp"
+#include "standard/standard_lenght.hpp"
+#include "standard/si_prefix.hpp"
 #include "_p/unit_type.hpp"
-#include "_p/unit_proxy.hpp"
+
 
 namespace unit
 {
 
+namespace multi
+{
+struct cubic_metres_in_gallon
+{
+	static constexpr long double factor = 4.546'09E-3l;
+};
+
+struct cubic_metres_in_pint
+{
+	static constexpr long double factor = cubic_metres_in_gallon::factor / 8.l;
+};
+} //namespace multi
+
+
 //======== ======== Template Type ======== ========
 
 template <_p::c_ValidFP T>
-using kelvin_t = typename make_unit<T, std::tuple<_p::dimension<standard::kelvin, 1>>, std::tuple<>>::type;
+using cubic_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 3>>, std::tuple<>>::type;
 
 template <_p::c_ValidFP T>
-using rankine_t = typename make_unit<T, std::tuple<_p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+using litre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 3>>, std::tuple<multi::deci<3>>>::type;
 
 template <_p::c_ValidFP T>
-using celcius_t = _p::Unit_proxy<T, standard::celcius>;
+using cubic_foot_t = typename make_unit<T, std::tuple<_p::dimension<standard::foot, 3>>, std::tuple<>>::type;
 
 template <_p::c_ValidFP T>
-using fahrenheit_t = _p::Unit_proxy<T, standard::fahrenheit>;
+using gallon_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 3>>, std::tuple<_p::scalar<multi::cubic_metres_in_gallon, 1>>>::type;
+
+template <_p::c_ValidFP T>
+using pint_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 3>>, std::tuple<_p::scalar<multi::cubic_metres_in_pint, 1>>>::type;
 
 
 //======== ======== Default Type ======== ========
 
-using kelvin	= kelvin_t	<_p::default_fp>;
-using rankine	= rankine_t	<_p::default_fp>;
-
-using celcius		= celcius_t		<_p::default_fp>;
-using fahrenheit	= fahrenheit_t	<_p::default_fp>;
+using cubic_metre	= cubic_metre_t	<_p::default_fp>;
+using litre			= litre_t		<_p::default_fp>;
+using cubic_foot	= cubic_foot_t	<_p::default_fp>;
+using gallon		= gallon_t		<_p::default_fp>;
+using pint			= pint_t		<_p::default_fp>;
 
 } //namespace unit

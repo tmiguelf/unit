@@ -28,6 +28,8 @@
 #pragma once
 
 #include "standard/standard_charge.hpp"
+#include "standard/multipliers.hpp"
+#include "standard/si_prefix.hpp"
 #include "_p/unit_type.hpp"
 
 namespace unit
@@ -38,9 +40,18 @@ namespace unit
 template <_p::c_ValidFP T>
 using coloumb_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<>>::type;
 
+template <_p::c_ValidFP T>
+using amper_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<_p::scalar<multi::seconds_in_hour, 1>>>::type;
+
+template <_p::c_ValidFP T>
+using milli_amper_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<multi::milli<1>, _p::scalar<multi::seconds_in_hour, 1>>>::type;
+
 
 //======== ======== Default Type ======== ========
 
-using coloumb = coloumb_t<_p::default_fp>;
+using coloumb			= coloumb_t			<_p::default_fp>;
+
+using amper_hour		= amper_hour_t		<_p::default_fp>;
+using milli_amper_hour	= milli_amper_hour_t<_p::default_fp>;
 
 } //namespace unit

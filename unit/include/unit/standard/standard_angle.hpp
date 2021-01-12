@@ -41,9 +41,14 @@ struct radian final: public angle_standard
 	static constexpr long double gauge = 1.l;
 };
 
+struct grad final: public angle_standard
+{
+	static constexpr long double gauge = mathlib::pi<long double> / 200.l;
+};
+
 struct degree final: public angle_standard
 {
-	static constexpr long double gauge = mathlib::pi<long double>/180.l;
+	static constexpr long double gauge = mathlib::pi<long double> / 180.l;
 };
 
 struct arc_minute final: public angle_standard
@@ -60,7 +65,6 @@ struct turn final: public angle_standard
 {
 	static constexpr long double gauge = mathlib::tau<long double>;
 };
-
 
 template<>
 struct SI_standard<::unit::_p::unit_id::angle>

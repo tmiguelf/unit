@@ -27,40 +27,25 @@
 
 #pragma once
 
-#include "unit/_p/unit_id.hpp"
+#include "_p/unit_type.hpp"
+#include "standard/standard_lenght.hpp"
+#include "standard/standard_time.hpp"
 
-namespace unit::standard
+namespace unit
 {
 
-struct mass_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::mass; };
+//======== ======== Template Type ======== ========
+
+template <_p::c_ValidFP T>
+using cubic_metre_per_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 3>, _p::dimension<standard::second, -1>>, std::tuple<>>::type;
+
+template <_p::c_ValidFP T>
+using cubic_foot_per_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::foot, 3>, _p::dimension<standard::second, -1>>, std::tuple<>>::type;
 
 
-struct si_mass final: public mass_standard
-{
-	static constexpr long double gauge = 1.l;
-};
+//======== ======== Default Type ======== ========
 
-struct gram final: public mass_standard
-{
-	static constexpr long double gauge = .001l;
-};
+using cubic_metres_per_second	= cubic_metre_per_second_t	<_p::default_fp>;
+using cubic_foot_per_second		= cubic_foot_per_second_t	<_p::default_fp>;
 
-struct pound_av final: public mass_standard
-{
-	static constexpr long double gauge = 0.45359237l;
-};
-
-struct ounce_av final: public mass_standard
-{
-	static constexpr long double gauge = pound_av::gauge / 16.l;
-};
-
-
-template<>
-struct SI_standard<::unit::_p::unit_id::mass>
-{
-	using type = si_mass;
-	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");
-};
-
-} //namespace unit::standard
+} //namespace unit

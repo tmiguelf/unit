@@ -52,14 +52,32 @@ struct has_factor: std::false_type {};
 template <typename Type>
 struct has_factor<Type, std::enable_if_t<std::is_same_v<decltype(Type::factor), const long double>, void>>: std::true_type {};
 
+template <typename, typename = void>
+struct has_offset: std::false_type {};
+template <typename Type>
+struct has_offset<Type, std::enable_if_t<std::is_same_v<decltype(Type::offset), const long double>, void>>: std::true_type {};
+
 
 //A measurment standard requires a gauge, and must refer to a specific physical property
 template<typename T>
-concept c_standard = has_unit_id<T>::value && has_gauge<T>::value;
+constexpr bool is_standard_v = has_unit_id<T>::value && has_gauge<T>::value;
+template<typename T>
+concept c_standard = is_standard_v<T>;
 
 //A multiplier just needs to a value that can multiply
 template<typename T>
 concept c_mutiplier = has_factor<T>::value;
+
+
+template <typename, typename = void>
+struct has_standard: std::false_type {};
+template <typename Type>
+struct has_standard<Type, std::enable_if_t<is_standard_v<typename Type::standard_t>, void>>: std::true_type {};
+
+//for biased units like Celcius or farenheit
+template<typename T>
+concept c_proxy_property = has_offset<T>::value && has_standard<T>::value;
+
 
 template <typename, typename>
 struct less;
@@ -71,9 +89,8 @@ struct invert;
 
 /// \brief Represents a dimension, requires a standard and a non-zero rank
 template <c_standard Standard, int8_t Rank>
-class dimension
+struct dimension
 {
-public:
 	using standard_t = Standard;
 	static constexpr unit_id		id			= standard_t::id;
 	static constexpr int8_t			rank		= Rank;
@@ -104,7 +121,7 @@ concept c_dimension = is_dimension<T>::value;
 
 //----
 template <c_dimension T, c_dimension U>
-struct less<T, U>: std::conditional_t<
+struct less<T, U>: public std::conditional_t<
 	(T::id == U::id) ? (T::base_gauge < U::base_gauge) : (T::id < U::id)
 	, std::true_type, std::false_type>
 {};
@@ -126,7 +143,7 @@ struct standardize
 //======== ======== Scalar Handling ======== ========
 /// \brief Represents a scalar, requires a multiplier and a non-zero power
 template <c_mutiplier Scalar, int8_t Power>
-class scalar
+struct scalar
 {
 	using scalar_t = Scalar;
 	static constexpr int8_t			power		= Power;
@@ -157,7 +174,7 @@ concept c_scalar = is_scalar<T>::value;
 
 //----
 template <c_scalar T, c_scalar U>
-struct less<T, U>: std::conditional_t<
+struct less<T, U>: public std::conditional_t<
 	(T::base_factor < U::base_factor)
 	, std::true_type, std::false_type>
 {};

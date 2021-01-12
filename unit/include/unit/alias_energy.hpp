@@ -27,40 +27,32 @@
 
 #pragma once
 
-#include "unit/_p/unit_id.hpp"
+#include "_p/unit_type.hpp"
+#include "standard/standard_mass.hpp"
+#include "standard/standard_lenght.hpp"
+#include "standard/standard_time.hpp"
+#include "standard/si_prefix.hpp"
+#include "standard/multipliers.hpp"
 
-namespace unit::standard
+namespace unit
 {
 
-struct mass_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::mass; };
+//======== ======== Template Type ======== ========
+template <_p::c_ValidFP T>
+using joule_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;
+
+template <_p::c_ValidFP T>
+using watt_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::seconds_in_hour, 1>>>::type;
+
+template <_p::c_ValidFP T>
+using kilo_watt_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::seconds_in_hour, 1>, multi::kilo<1>>>::type;
 
 
-struct si_mass final: public mass_standard
-{
-	static constexpr long double gauge = 1.l;
-};
+//======== ======== Default Type ======== ========
 
-struct gram final: public mass_standard
-{
-	static constexpr long double gauge = .001l;
-};
-
-struct pound_av final: public mass_standard
-{
-	static constexpr long double gauge = 0.45359237l;
-};
-
-struct ounce_av final: public mass_standard
-{
-	static constexpr long double gauge = pound_av::gauge / 16.l;
-};
+using joule				= joule_t			<_p::default_fp>;
+using watt_hour			= watt_hour_t		<_p::default_fp>;
+using kilo_watt_hour	= kilo_watt_hour_t	<_p::default_fp>;
 
 
-template<>
-struct SI_standard<::unit::_p::unit_id::mass>
-{
-	using type = si_mass;
-	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");
-};
-
-} //namespace unit::standard
+} //namespace unit

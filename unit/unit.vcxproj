@@ -52,17 +52,36 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\unit\alias_acceleration.hpp" />
     <ClInclude Include="include\unit\alias_angle.hpp" />
+    <ClInclude Include="include\unit\alias_angular_acceleration.hpp" />
+    <ClInclude Include="include\unit\alias_angular_velocity.hpp" />
+    <ClInclude Include="include\unit\alias_area.hpp" />
     <ClInclude Include="include\unit\alias_charge.hpp" />
+    <ClInclude Include="include\unit\alias_density.hpp" />
+    <ClInclude Include="include\unit\alias_digital.hpp" />
+    <ClInclude Include="include\unit\alias_electrical.hpp" />
+    <ClInclude Include="include\unit\alias_energy.hpp" />
+    <ClInclude Include="include\unit\alias_flow_mass.hpp" />
+    <ClInclude Include="include\unit\alias_flow_volume.hpp" />
+    <ClInclude Include="include\unit\alias_force.hpp" />
     <ClInclude Include="include\unit\alias_lenght.hpp" />
     <ClInclude Include="include\unit\alias_luminosity.hpp" />
     <ClInclude Include="include\unit\alias_mass.hpp" />
+    <ClInclude Include="include\unit\alias_power.hpp" />
+    <ClInclude Include="include\unit\alias_pressure.hpp" />
     <ClInclude Include="include\unit\alias_temperature.hpp" />
     <ClInclude Include="include\unit\alias_time.hpp" />
+    <ClInclude Include="include\unit\alias_torque.hpp" />
+    <ClInclude Include="include\unit\alias_velocity.hpp" />
+    <ClInclude Include="include\unit\alias_volume.hpp" />
     <ClInclude Include="include\unit\standard\constants.hpp" />
+    <ClInclude Include="include\unit\standard\digital_prefix.hpp" />
+    <ClInclude Include="include\unit\standard\si_prefix.hpp" />
     <ClInclude Include="include\unit\standard\multipliers.hpp" />
     <ClInclude Include="include\unit\standard\standard_angle.hpp" />
     <ClInclude Include="include\unit\standard\standard_charge.hpp" />
+    <ClInclude Include="include\unit\standard\standard_digital.hpp" />
     <ClInclude Include="include\unit\standard\standard_lenght.hpp" />
     <ClInclude Include="include\unit\standard\standard_luminosity.hpp" />
     <ClInclude Include="include\unit\standard\standard_mass.hpp" />

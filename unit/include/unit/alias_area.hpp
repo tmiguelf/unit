@@ -27,34 +27,49 @@
 
 #pragma once
 
-#include "standard/standard_temperature.hpp"
+#include "standard/standard_lenght.hpp"
+#include "standard/si_prefix.hpp"
 #include "_p/unit_type.hpp"
-#include "_p/unit_proxy.hpp"
 
 namespace unit
 {
 
+namespace multi
+{
+struct square_yards_in_acre
+{
+	static constexpr long double factor = 4840.l;
+};
+} // namespace multi
+
 //======== ======== Template Type ======== ========
+template <_p::c_ValidFP T>
+using square_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<>>::type;
 
 template <_p::c_ValidFP T>
-using kelvin_t = typename make_unit<T, std::tuple<_p::dimension<standard::kelvin, 1>>, std::tuple<>>::type;
+using square_foot_t = typename make_unit<T, std::tuple<_p::dimension<standard::foot, 2>>, std::tuple<>>::type;
 
 template <_p::c_ValidFP T>
-using rankine_t = typename make_unit<T, std::tuple<_p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+using hectare_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<multi::hecto<2>>>::type;
 
 template <_p::c_ValidFP T>
-using celcius_t = _p::Unit_proxy<T, standard::celcius>;
+using acre_t = typename make_unit<T, std::tuple<_p::dimension<standard::yard, 2>>, std::tuple<_p::scalar<multi::square_yards_in_acre, 1>>>::type;
 
 template <_p::c_ValidFP T>
-using fahrenheit_t = _p::Unit_proxy<T, standard::fahrenheit>;
+using square_mile_t = typename make_unit<T, std::tuple<_p::dimension<standard::mile, 2>>, std::tuple<>>::type;
 
+template <_p::c_ValidFP T>
+using square_kilo_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<multi::kilo<2>>>::type;
 
 //======== ======== Default Type ======== ========
 
-using kelvin	= kelvin_t	<_p::default_fp>;
-using rankine	= rankine_t	<_p::default_fp>;
+using square_metre	= square_metre_t<_p::default_fp>;
+using square_foot	= square_foot_t	<_p::default_fp>;
+using hectare		= hectare_t		<_p::default_fp>;
+using acre			= acre_t		<_p::default_fp>;
+using square_mile	= square_mile_t	<_p::default_fp>;
 
-using celcius		= celcius_t		<_p::default_fp>;
-using fahrenheit	= fahrenheit_t	<_p::default_fp>;
+using square_kilo_metre	= square_kilo_metre_t<_p::default_fp>;
+
 
 } //namespace unit

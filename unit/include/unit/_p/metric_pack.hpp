@@ -32,74 +32,14 @@
 
 namespace unit::_p
 {
-/*
-template<c_tuple Tuple>
-struct is_dimension_colapsed
-{
-private:
-	static constexpr uintptr_t tuple_size = std::tuple_size_v<Tuple>;
-
-	template<uintptr_t Index = 0>
-	static constexpr bool check()
-	{
-		if constexpr(Index + 1 < tuple_size)
-		{
-			if constexpr(std::tuple_element_t<Index, Tuple>::id == std::tuple_element_t<Index + 1, Tuple>::id)
-			{
-				return false;
-			}
-			else
-			{
-				return check<Index + 1>();
-			}
-		}
-		else
-		{
-			return true;
-		}
-	}
-
-public:
-	static constexpr bool value = check();
-};
-
-template<c_tuple Tuple>
-struct is_scalar_colapsed
-{
-private:
-	static constexpr uintptr_t tuple_size = std::tuple_size_v<Tuple>;
-
-	template<uintptr_t Index = 0>
-	static constexpr bool check()
-	{
-		if constexpr(Index + 1 < tuple_size)
-		{
-			if constexpr(std::tuple_element_t<Index, Tuple>::base_factor == std::tuple_element_t<Index + 1, Tuple>::base_factor)
-			{
-				return false;
-			}
-			else
-			{
-				return check<Index + 1>();
-			}
-		}
-		else
-		{
-			return true;
-		}
-	}
-public:
-	static constexpr bool value = check();
-};
-*/
 
 /// \brief stores information about the unit
 template<c_tuple Dimensions, c_tuple Scalars>
 struct unit_pack
 {
 public:
-	using dimension_pack = Dimensions;		//typename tuple_filter<is_dimension, Tuple>::type;
-	using scalar_pack = Scalars;			//typename tuple_filter<is_scalar, Tuple>::type;
+	using dimension_pack = Dimensions;
+	using scalar_pack = Scalars;
 
 	static_assert(!tuple_find<not_dimension, dimension_pack>::value, "Dimension pack can only contain dimensions");
 	static_assert(!tuple_find<not_scalar, scalar_pack>::value, "Scalar pack can only contain scalars");
@@ -108,11 +48,6 @@ public:
 	static_assert(is_tuple_strictly_sorted<less, scalar_pack>::value, "Scalar must be packed and sorted");
 
 	static_assert(std::tuple_size_v<dimension_pack> != 0, "Dimension pack must not be empty");
-
-	//static_assert(!tuple_find<neither_dimension_or_scalar, Tuple>::value, "Unit pack element neither dimension or scalar");
-	//static_assert(is_dimension_colapsed<metric_pack>::value, "Unit pack must be colapsed");
-	//static_assert(is_scalar_colapsed<scalar_pack>::value, "Scalar pack must be colapsed");
-	//using total_pack = decltype(std::tuple_cat(std::declval<metric_pack>(), std::declval<scalar_pack>()));
 
 	static constexpr long double gauge = tuple_multiply<get_factor, dimension_pack>::value * tuple_multiply<get_factor, scalar_pack>::value;
 };
@@ -177,11 +112,6 @@ using is_compatible_unit_pack = compatible_tuple_pack<typename Pack1::dimension_
 
 template<typename Pack1, typename Pack2>
 concept c_compatible_unit_pack = is_compatible_unit_pack<Pack1, Pack2>::value;
-
-/*
-template<typename Pack1, typename Pack2>
-concept c_incompatible_unit_pack = !is_compatible_unit_pack<Pack1, Pack2>::value;
-*/
 
 /// \brief packs are not only compatible, they have the same gauge
 template<typename Pack1, typename Pack2>

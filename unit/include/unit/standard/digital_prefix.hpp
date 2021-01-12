@@ -27,40 +27,19 @@
 
 #pragma once
 
-#include "unit/_p/unit_id.hpp"
+#include "unit/_p/dimension.hpp"
+#include "multipliers.hpp"
 
-namespace unit::standard
+namespace unit::multi
 {
 
-struct mass_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::mass; };
+template<int8_t rank> using yobi = _p::scalar<bi, 24 * rank>;
+template<int8_t rank> using zebi = _p::scalar<bi, 21 * rank>;
+template<int8_t rank> using exbi = _p::scalar<bi, 18 * rank>;
+template<int8_t rank> using pebi = _p::scalar<bi, 15 * rank>;
+template<int8_t rank> using tebi = _p::scalar<bi, 12 * rank>;
+template<int8_t rank> using gibi = _p::scalar<bi,  9 * rank>;
+template<int8_t rank> using mebi = _p::scalar<bi,  6 * rank>;
+template<int8_t rank> using kibi = _p::scalar<bi,  3 * rank>;
 
-
-struct si_mass final: public mass_standard
-{
-	static constexpr long double gauge = 1.l;
-};
-
-struct gram final: public mass_standard
-{
-	static constexpr long double gauge = .001l;
-};
-
-struct pound_av final: public mass_standard
-{
-	static constexpr long double gauge = 0.45359237l;
-};
-
-struct ounce_av final: public mass_standard
-{
-	static constexpr long double gauge = pound_av::gauge / 16.l;
-};
-
-
-template<>
-struct SI_standard<::unit::_p::unit_id::mass>
-{
-	using type = si_mass;
-	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");
-};
-
-} //namespace unit::standard
+} //namespace unit::multi

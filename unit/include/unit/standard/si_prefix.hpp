@@ -27,40 +27,32 @@
 
 #pragma once
 
-#include "unit/_p/unit_id.hpp"
+#include "unit/_p/dimension.hpp"
+#include "multipliers.hpp"
 
-namespace unit::standard
+namespace unit::multi
 {
 
-struct mass_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::mass; };
+template<int8_t rank> using yotta	= _p::scalar<E, 24 * rank>;
+template<int8_t rank> using zetta	= _p::scalar<E, 21 * rank>;
+template<int8_t rank> using exa		= _p::scalar<E, 18 * rank>;
+template<int8_t rank> using peta	= _p::scalar<E, 15 * rank>;
+template<int8_t rank> using tera	= _p::scalar<E, 12 * rank>;
+template<int8_t rank> using giga	= _p::scalar<E,  9 * rank>;
+template<int8_t rank> using mega	= _p::scalar<E,  6 * rank>;
+template<int8_t rank> using kilo	= _p::scalar<E,  3 * rank>;
+template<int8_t rank> using hecto	= _p::scalar<E,  2 * rank>;
+template<int8_t rank> using deca	= _p::scalar<E,  1 * rank>;
 
+template<int8_t rank> using deci	= _p::scalar<E, - 1 * rank>;
+template<int8_t rank> using centi	= _p::scalar<E, - 2 * rank>;
+template<int8_t rank> using milli	= _p::scalar<E, - 3 * rank>;
+template<int8_t rank> using micro	= _p::scalar<E, - 6 * rank>;
+template<int8_t rank> using nano	= _p::scalar<E, - 9 * rank>;
+template<int8_t rank> using pico	= _p::scalar<E, -12 * rank>;
+template<int8_t rank> using femto	= _p::scalar<E, -15 * rank>;
+template<int8_t rank> using atto	= _p::scalar<E, -18 * rank>;
+template<int8_t rank> using zepto	= _p::scalar<E, -21 * rank>;
+template<int8_t rank> using yocto	= _p::scalar<E, -24 * rank>;
 
-struct si_mass final: public mass_standard
-{
-	static constexpr long double gauge = 1.l;
-};
-
-struct gram final: public mass_standard
-{
-	static constexpr long double gauge = .001l;
-};
-
-struct pound_av final: public mass_standard
-{
-	static constexpr long double gauge = 0.45359237l;
-};
-
-struct ounce_av final: public mass_standard
-{
-	static constexpr long double gauge = pound_av::gauge / 16.l;
-};
-
-
-template<>
-struct SI_standard<::unit::_p::unit_id::mass>
-{
-	using type = si_mass;
-	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");
-};
-
-} //namespace unit::standard
+} //namespace unit::multi

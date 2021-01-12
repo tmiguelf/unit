@@ -32,7 +32,7 @@
 namespace unit::standard
 {
 
-constexpr long double avogadro_number = 6.02214076E23l;
-
+constexpr long double avogadro_number = 6.022'140'76E+23l;
+constexpr long double metric_speed_of_light = 299'792'458.l;
 
 } //namespace unit::standard

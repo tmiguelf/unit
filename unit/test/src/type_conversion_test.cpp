@@ -345,7 +345,7 @@ TEST(type_conversion, divide)
 		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::SI_standard<::unit::_p::unit_id::length>::type, -2>, _p::dimension<standard::SI_standard<::unit::_p::unit_id::mass>::type, 2>>, std::tuple<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), expected_type_t>));
-		ASSERT_TRUE(closeEnough(result.value(), val_expect, std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect * 3.)) << result.value() << " " << val_expect;
+		ASSERT_TRUE(closeEnough(result.value(), val_expect, std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect * 3.));
 	}
 }
 

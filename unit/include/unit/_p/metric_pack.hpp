@@ -327,7 +327,7 @@ private:
 			}
 			else
 			{
-				return std::declval<Acumulated>();
+				return Acumulated{};
 			}
 		}
 	}

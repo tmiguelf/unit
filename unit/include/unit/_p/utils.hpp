@@ -193,19 +193,17 @@ private:
 			Comparator<
 				std::tuple_element_t<i, LoopTuple>, std::tuple_element_t<j, LoopTuple>
 			>::value,
-			typename tuple_element_swap<i, j, LoopTuple>::type,
-			LoopTuple
+			LoopTuple,
+			typename tuple_element_swap<i, j, LoopTuple>::type
 		>;
 
-		using type =
-			typename tuple_selection_sort_impl<i, j + 1, tuple_size, tuple_type>::type;
+		using type = typename tuple_selection_sort_impl<i, j + 1, tuple_size, tuple_type>::type;
 	};
 
 	template <std::uintptr_t i, std::uintptr_t tuple_size, c_tuple LoopTuple>
 	struct tuple_selection_sort_impl<i, tuple_size, tuple_size, LoopTuple>
 	{
-		using type =
-			typename tuple_selection_sort_impl<i + 1, i + 2, tuple_size, LoopTuple>::type;
+		using type = typename tuple_selection_sort_impl<i + 1, i + 2, tuple_size, LoopTuple>::type;
 	};
 
 	template <std::uintptr_t j, std::uintptr_t tuple_size, c_tuple LoopTuple>
@@ -231,7 +229,7 @@ private:
 	{
 		if constexpr(Index + 1 < tuple_size)
 		{
-			if constexpr (Comparator<std::tuple_element_t<Index, Tuple>, std::tuple_element_t<Index +1, Tuple>>::value)
+			if constexpr (Comparator<std::tuple_element_t<Index, Tuple>, std::tuple_element_t<Index + 1, Tuple>>::value)
 			{
 				return check<Index + 1>();
 			}

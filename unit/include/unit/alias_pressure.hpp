@@ -85,7 +85,6 @@ template <_p::c_ValidFP T>
 using poundal_per_square_foot_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::foot, -1>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;
 
 
-
 //======== ======== Default Type ======== ========
 using pascal					= pascal_t					<_p::default_fp>;
 using kilopascal				= kilopascal_t				<_p::default_fp>;
@@ -96,8 +95,6 @@ using inch_mercury60			= inch_mercury60_t			<_p::default_fp>;
 using inch_mercury				= inch_mercury_t			<_p::default_fp>;
 using atmosphere				= atmosphere_t				<_p::default_fp>;
 using poundal_per_square_foot	= poundal_per_square_foot_t	<_p::default_fp>;
-
-
 
 
 } //namespace unit

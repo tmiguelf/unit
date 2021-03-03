@@ -15,8 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\unit_test.cpp">
+    <ClCompile Include="src\invariant_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\type_conversion_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\test_utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

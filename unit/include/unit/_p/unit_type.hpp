@@ -52,7 +52,7 @@ public:
 	inline constexpr Unit(): m_value{} {}
 	inline constexpr Unit(const Unit&) = default;
 	
-	inline constexpr Unit(value_t p_value)
+	inline explicit constexpr Unit(value_t p_value)
 		: m_value{p_value}
 	{}
 
@@ -100,18 +100,19 @@ public:
 	inline Unit& operator *= (Type2 p_val)
 	{
 		m_value *= p_val;
+		return *this;
 	}
 
 	template<_p::c_arithmethic Type2>
 	inline Unit& operator /= (Type2 p_val)
 	{
 		m_value /= p_val;
+		return *this;
 	}
-
 
 	inline constexpr Unit operator + (const Unit& p_other) const
 	{
-		return m_value + p_other.value();
+		return Unit{m_value + p_other.value()};
 	}
 
 	template <c_ValidFP Type2, c_unit_pack Pack2> requires
@@ -132,7 +133,7 @@ public:
 
 	inline constexpr Unit operator - (const Unit& p_other) const
 	{
-		return m_value - p_other.value();
+		return Unit{m_value - p_other.value()};
 	}
 
 	template <c_ValidFP Type2, c_unit_pack Pack2> requires
@@ -201,7 +202,7 @@ public:
 	inline constexpr bool operator == (const Unit& p_other) const { return m_value == p_other.value(); }
 	inline constexpr bool operator != (const Unit& p_other) const { return m_value != p_other.value(); }
 
-	inline constexpr Unit operator -() { return -m_value; }
+	inline constexpr Unit operator -() const { return Unit{-m_value}; }
 	inline constexpr value_t value() const { return m_value; }
 
 

@@ -420,7 +420,15 @@ public:
 template<c_ValidFP value_t, c_unit_pack Pack1, c_unit_pack Pack2, c_ValidFP value_t2> requires c_compatible_unit_pack<Pack1, Pack2>
 inline constexpr value_t metric_conversion(value_t2 p_t2)
 {
-	constexpr long double conversion = Pack2::gauge / Pack1::gauge;
+	using dim1	= typename inverse_tuple_pack<typename Pack1::dimension_pack>::type;
+	using scal1	= typename inverse_tuple_pack<typename Pack1::scalar_pack>::type;
+	using dim2	= typename Pack2::dimension_pack;
+	using scal2	= typename Pack2::scalar_pack;
+
+	constexpr long double scalar_factor = tuple_multiply<get_factor, typename scalar_merge<scal2, scal1>::type>::value;
+	constexpr long double conversion = tuple_multiply<get_factor, typename dimension_merge_no_clober<dim2, dim1>::type>::value * scalar_factor;
+
+//	constexpr long double conversion = Pack2::gauge / Pack1::gauge;
 	return static_cast<value_t>(p_t2 * conversion);
 }
 

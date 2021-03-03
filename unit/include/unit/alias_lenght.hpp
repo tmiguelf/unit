@@ -63,8 +63,6 @@ using light_year_t = typename make_unit<T, std::tuple<_p::dimension<standard::li
 
 
 
-
-
 template <_p::c_ValidFP T>
 using nano_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>>, std::tuple<multi::nano<1>>>::type;
 

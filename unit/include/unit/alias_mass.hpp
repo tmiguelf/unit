@@ -55,10 +55,8 @@ using tonne_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass
 
 using kilogram	= kilogram_t<_p::default_fp>;
 using gram		= gram_t	<_p::default_fp>;
-using pound_av	= pound_av_t	<_p::default_fp>;
-using ounce_av	= ounce_av_t	<_p::default_fp>;
+using pound_av	= pound_av_t<_p::default_fp>;
+using ounce_av	= ounce_av_t<_p::default_fp>;
 using tonne		= tonne_t	<_p::default_fp>;
-
-
 
 } //namespace unit

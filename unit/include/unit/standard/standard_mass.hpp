@@ -47,7 +47,7 @@ struct gram final: public mass_standard
 
 struct pound_av final: public mass_standard
 {
-	static constexpr long double gauge = 0.45359237l;
+	static constexpr long double gauge = .45359237l;
 };
 
 struct ounce_av final: public mass_standard

@@ -60,7 +60,4 @@ struct inches_in_meter
 	static constexpr long double factor = 1.l / .0254l;
 };
 
-
-
-
 } //namespace unit::multi

@@ -56,7 +56,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src/unit_test.cpp" />
+    <ClCompile Include="src\invariant_test.cpp" />
+    <ClCompile Include="src\type_conversion_test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\test_utils.hpp" />
   </ItemGroup>
   <Import Project="$(quickMSBuildPath)default.cpp.targets" />
 </Project>

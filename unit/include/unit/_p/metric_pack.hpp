@@ -511,10 +511,8 @@ inline constexpr auto metric_divide(value_t1 p_t1, value_t2 p_t2)
 	auto t_result = p_t1 / p_t2;
 	using vtype = decltype(t_result);
 
-
 	using scalar_tuple = typename scalar_merge<scal1, scal2>::type;
 	constexpr long double scalar_factor = tuple_multiply<get_factor, scalar_tuple>::value;
-
 
 	if constexpr(has_conflicting_units<dim1, dim2>::value)
 	{

@@ -26,10 +26,44 @@
 //======== ======== ======== ======== ======== ======== ======== ========
 
 #include <cstring>
+#include <cstdint>
+#include <type_traits>
+#include <bit>
+
+
+union aux_long_double
+{
+	uint64_t _int[2];
+	long double _fp;
+};
+
+
 
 template <typename T>
 bool binarySame(const T& p_1, const T& p_2)
 {
+	if constexpr(std::is_same_v<long double, T> && sizeof(T) == 16)
+	{
+		aux_long_double aux1;
+		aux_long_double aux2;
+		aux1._fp = p_1;
+		aux2._fp = p_2;
+
+		if constexpr (std::endian::native == std::endian::big)
+		{
+			constexpr uint64_t mask = 0x00'00'00'00'00'00'11'11;
+			aux1._int[0] &= mask;
+			aux2._int[0] &= mask;
+		}
+		else //unsure if this is correct
+		{
+			constexpr uint64_t mask = 0x00'00'00'00'00'00'11'11;
+			aux1._int[1] &= mask;
+			aux2._int[1] &= mask;
+		}
+
+		return memcmp(&aux1, &aux2, sizeof(aux_long_double)) == 0;
+	}
 	return memcmp(&p_1, &p_2, sizeof(T)) == 0;
 }
 

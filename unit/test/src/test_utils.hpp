@@ -41,8 +41,9 @@ bool binarySame(const T& p_1, const T& p_2)
 }
 
 template <typename T>
-bool closeEnough(const T& p_1, const T& p_2, const T p_epsilon)
+bool closeEnough(const T& p_1, const T& p_2, T p_epsilon)
 {
+	if(p_epsilon < 0) p_epsilon = -p_epsilon;
 	const T diff = p_1 - p_2;
 	return (diff <= p_epsilon) && (diff >= -p_epsilon);
 }

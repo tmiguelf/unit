@@ -355,10 +355,80 @@ TEST(type_conversion, divide)
 
 TEST(type_conversion, add_assign)
 {
+	//simple
+	{
+		constexpr double val1 = 0.3714285714285714413;
+		constexpr double val2 = 4.1;
+
+		std::remove_cv_t<decltype(val1)> val_expect = val1;
+		val_expect += (val2 * 5280.);
+
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 1>>, std::tuple<>>::type;
+
+		type1_test_t result{val1};
+		constexpr type2_test_t aux{val2};
+		result += aux;
+
+		ASSERT_TRUE(closeEnough(result.value(), val_expect, std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect));
+	}
+
+	//complex
+	{
+		constexpr float val1 = 0.3714285714285714413f;
+		constexpr long double val2 = 4.1;
+
+		std::remove_cv_t<decltype(val1)> val_expect = val1;
+		val_expect += static_cast<decltype(val1)>(val2 * 5280. * 5280. / 4096.);
+
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 2>, _p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+
+		type1_test_t result{val1};
+		constexpr type2_test_t aux{val2};
+		result += aux;
+
+		ASSERT_TRUE(closeEnough(result.value(), val_expect, std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect));
+	}
 }
 
 TEST(type_conversion, subtract_assign)
 {
+	//simple
+	{
+		constexpr double val1 = 0.3714285714285714413;
+		constexpr double val2 = 4.1;
+
+		std::remove_cv_t<decltype(val1)> val_expect = val1;
+		val_expect -= (val2 * 5280.);
+
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 1>>, std::tuple<>>::type;
+
+		type1_test_t result{val1};
+		constexpr type2_test_t aux{val2};
+		result -= aux;
+
+		ASSERT_TRUE(closeEnough(result.value(), val_expect, -std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect)) << result.value() << " " << val_expect;
+	}
+
+	//complex
+	{
+		constexpr float val1 = 0.3714285714285714413f;
+		constexpr long double val2 = 4.1;
+
+		std::remove_cv_t<decltype(val1)> val_expect = val1;
+		val_expect -= static_cast<decltype(val1)>(val2 * 5280. * 5280. / 4096.);
+
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 2>, _p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+
+		type1_test_t result{val1};
+		constexpr type2_test_t aux{val2};
+		result -= aux;
+
+		ASSERT_TRUE(closeEnough(result.value(), val_expect, -std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect));
+	}
 }
 
 } //namespace unit

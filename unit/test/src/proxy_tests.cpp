@@ -25,25 +25,31 @@
 ///		SOFTWARE.
 //======== ======== ======== ======== ======== ======== ======== ========
 
-#include <cstring>
-#include <cstdint>
-#include <type_traits>
-#include <cmath>
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
-template <typename T>
-bool binarySame(const T& p_1, const T& p_2)
+#include <unit/alias_temperature.hpp>
+
+#include "test_utils.hpp"
+
+namespace unit
 {
-	if constexpr (std::is_same_v<long double, T> && !std::has_unique_object_representations_v<long double> && sizeof(long double) > 8)
+
+TEST(proxy_type, to_unit)
+{
+	//compatible types
 	{
-		return (p_1 == p_2) || (std::isnan(p_1) && std::isnan(p_2));
+		constexpr double val = 4.1;
+		constexpr double val_expect = static_cast<decltype(val)>(val + 459.67l);
+
+		using test_t			= fahrenheit_t<std::remove_const_t<decltype(val)>>;
+		using expected_type_t	= rankine_t<std::remove_const_t<decltype(val_expect)>>;
+
+		constexpr auto result = test_t{val}.to_unit();
+
+		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
+		ASSERT_TRUE(closeEnough(result.value(), val_expect, std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect));
 	}
-	return memcmp(&p_1, &p_2, sizeof(T)) == 0;
 }
 
-template <typename T>
-constexpr bool closeEnough(const T& p_1, const T& p_2, T p_epsilon)
-{
-	if(p_epsilon < 0) p_epsilon = -p_epsilon;
-	const T diff = p_1 - p_2;
-	return (diff <= p_epsilon) && (diff >= -p_epsilon);
-}
+} //namespace unit

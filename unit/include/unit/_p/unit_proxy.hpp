@@ -84,67 +84,6 @@ public:
 	//---- Operators ----
 	inline Unit_proxy& operator = (const Unit_proxy& p_other) = default;
 
-	inline Unit_proxy& operator += (const Unit<value_t, unit_pack_t>& p_other)
-	{
-		m_value += p_other.value();
-		return *this;
-	}
-
-	inline Unit_proxy& operator -= (const Unit<value_t, unit_pack_t>& p_other)
-	{
-		m_value -= p_other.value();
-		return *this;
-	}
-
-	template<c_ValidFP Type2, c_unit_pack Pack2> requires
-		c_interchangeable_unit_pack<unit_pack_t, typename Unit<Type2, Pack2>::unit_pack>
-	inline constexpr auto operator + (const Unit<Type2, Pack2>& p_other) const
-	{
-		using vtype = decltype(std::declval<Type>() + std::declval<Type2>());
-		return Unit_proxy<vtype, Property>{m_value + p_other.value()};
-	}
-
-	template<c_ValidFP Type2, c_unit_pack Pack2> requires
-		c_weak_compatible_unit_pack<unit_pack_t, typename Unit<Type2, Pack2>::unit_pack>
-	inline constexpr auto operator + (const Unit<Type2, Pack2>& p_other) const
-	{
-		return to_unit() + p_other;
-	}
-
-	template<c_ValidFP Type2, c_unit_pack Pack2> requires
-		c_interchangeable_unit_pack<unit_pack_t, typename Unit<Type2, Pack2>::unit_pack>
-	inline constexpr auto operator - (const Unit<Type2, Pack2>& p_other) const
-	{
-		using vtype = decltype(std::declval<Type>() - std::declval<Type2>());
-		return Unit_proxy<vtype, Property>{m_value - p_other.value()};
-	}
-
-	template<c_ValidFP Type2, c_unit_pack Pack2> requires
-		c_weak_compatible_unit_pack<unit_pack_t, typename Unit<Type2, Pack2>::unit_pack>
-	inline constexpr auto operator - (const Unit<Type2, Pack2>& p_other) const
-	{
-		return to_unit() - p_other;
-	}
-
-	inline constexpr Unit<value_t, unit_pack_t> operator - (const Unit_proxy& p_other) const
-	{
-		return m_value + offset() - p_other.m_value;
-	}
-
-	template<c_ValidFP Type2, c_proxy_property Prop2> requires (std::is_same_v<Property, Prop2>)
-	inline constexpr auto operator - (const Unit_proxy<Type2, Prop2>& p_other) const
-	{
-		using vtype = decltype(std::declval<Type>() - std::declval<Type2>());
-		return Unit<vtype, unit_pack_t>{m_value - p_other.m_value};
-	}
-
-	template<c_ValidFP Type2, c_proxy_property Prop2> requires
-		(!std::is_same_v<Property, Prop2> && (Property::standard_t::id == Prop2::standard_t::id))
-	inline constexpr auto operator - (const Unit_proxy<Type2, Prop2>& p_other) const
-	{
-		return to_unit() - p_other;
-	}
-
 	inline constexpr bool operator <  (const Unit_proxy& p_other) const { return m_value <  p_other.value(); }
 	inline constexpr bool operator >  (const Unit_proxy& p_other) const { return m_value >  p_other.value(); }
 	inline constexpr bool operator <= (const Unit_proxy& p_other) const { return m_value <= p_other.value(); }
@@ -159,7 +98,7 @@ public:
 
 	inline constexpr Unit<value_t, unit_pack_t> to_unit() const
 	{
-		return m_value + offset();
+		return Unit<value_t, unit_pack_t>{m_value + offset()};
 	}
 	inline constexpr value_t value() const { return m_value; }
 

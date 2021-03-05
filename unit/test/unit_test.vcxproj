@@ -57,6 +57,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\invariant_test.cpp" />
+    <ClCompile Include="src\proxy_tests.cpp" />
     <ClCompile Include="src\type_conversion_test.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -25,7 +25,7 @@
 
 #pragma once
 
-#include "unit/_p/dimension.hpp"
+#include <unit/_p/dimension.hpp>
 #include "multipliers.hpp"
 
 namespace unit::multi

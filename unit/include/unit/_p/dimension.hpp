@@ -25,6 +25,7 @@
 
 #pragma once
 
+#include <cstdint>
 #include <type_traits>
 
 #include "utils.hpp"
@@ -98,14 +99,13 @@ struct dimension
 	static_assert(Rank != 0, "Rank must not be 0");
 };
 
-//
-template <template <c_standard, int8_t> typename Template, typename>
-struct is_dimension_like : public std::false_type {};
-template <template <c_standard, int8_t> typename Template, typename T1, int8_t V1>
-struct is_dimension_like<Template, Template<T1, V1>> : public std::true_type{};
 
 template<typename T>
-using is_dimension = is_dimension_like<dimension, T>;
+struct is_dimension: public std::false_type {};
+
+template<typename T1, int8_t V1>
+struct is_dimension<dimension<T1, V1>>: public std::true_type {};
+
 
 /// \brief used to detect things that are not dimensions
 template<typename T>
@@ -152,13 +152,12 @@ struct scalar
 };
 
 
-template <template <c_mutiplier, int8_t> typename Template, typename>
-struct is_scalar_like : public std::false_type {};
-template <template <c_mutiplier, int8_t> typename Template, c_mutiplier T1, int8_t V1>
-struct is_scalar_like<Template, Template<T1, V1>> : public std::true_type{};
-
 template<typename T>
-using is_scalar = is_scalar_like<scalar, T>;
+struct is_scalar: public std::false_type {};
+
+template<typename T1, int8_t V1>
+struct is_scalar<scalar<T1, V1>>: public std::true_type {};
+
 
 /// \brief used to detect things that are not scalar
 template<typename T>

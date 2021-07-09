@@ -32,11 +32,11 @@
 namespace unit::_p
 {
 
-// \brief used to check if tuple like template is of a specific template type
-template <template <typename...> typename Template, typename>
-struct is_tuple_like : public std::false_type {};
-template <template <typename...> typename Template, typename ...Type>
-struct is_tuple_like<Template, Template<Type...>> : public std::true_type{};
+template<typename> struct is_tuple : public std::false_type {};
+template<typename ...Type> struct is_tuple<std::tuple<Type...>> : public std::true_type{};
+
+template<typename T>
+concept c_tuple = is_tuple<T>::value;
 
 // \brief supported value types
 template<typename T>
@@ -44,9 +44,6 @@ concept c_ValidFP = std::is_floating_point_v<T> && !std::is_const_v<T>;
 
 template<typename T>
 concept c_arithmethic = std::is_arithmetic_v<T>;
-
-template<typename T>
-concept c_tuple = is_tuple_like<std::tuple, T>::value;
 
 template<typename T>
 constexpr bool is_tuple_empty_v = std::tuple_size_v<T> == 0;

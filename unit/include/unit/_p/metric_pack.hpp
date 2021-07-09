@@ -50,11 +50,18 @@ public:
 	static constexpr long double gauge = tuple_multiply<get_factor, dimension_pack>::value * tuple_multiply<get_factor, scalar_pack>::value;
 };
 
-template<typename T>
-constexpr bool is_unit_pack_v = is_tuple_like<unit_pack, T>::value;
+
+
+
+
+template<typename> struct is_unit_pack : public std::false_type {};
+template<typename ...Type> struct is_unit_pack<unit_pack<Type...>> : public std::true_type{};
 
 template<typename T>
-concept c_unit_pack = is_tuple_like<unit_pack, T>::value;
+constexpr bool is_unit_pack_v = is_unit_pack<T>::value;
+
+template<typename T>
+concept c_unit_pack = is_unit_pack_v<T>;
 
 
 /// \brief checks if 2 tuples have the same type of dimensions

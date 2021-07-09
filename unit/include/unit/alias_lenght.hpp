@@ -35,6 +35,10 @@ namespace unit
 
 //======== ======== Template Type ======== ========
 
+constexpr bool val = _p::is_dimension<_p::dimension<standard::metre, 1>>::value;
+
+
+
 template <_p::c_ValidFP T>
 using metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>>, std::tuple<>>::type;
 

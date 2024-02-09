@@ -28,6 +28,8 @@
 #include "utils.hpp"
 #include "dimension.hpp"
 
+#include "metric_type.hpp"
+
 namespace unit::_p
 {
 
@@ -84,7 +86,9 @@ private:
 			using dim1 = std::tuple_element_t<Index, Pack1>;
 			using dim2 = std::tuple_element_t<Index, Pack1>;
 
-			if constexpr(dim1::id == dim2::id && dim1::rank == dim2::rank)
+			if constexpr (
+				compare_equal_metric_v<typename dim1::metric_t, typename dim2::metric_t>
+				&& dim1::rank == dim2::rank)
 			{
 				return match_all<Index + 1>();
 			}
@@ -147,11 +151,13 @@ private:
 	template<uintptr_t Index1 = 0, uintptr_t Index2 = 0>
 	static constexpr bool check()
 	{
-		if constexpr(Index1 < tuple1_size && Index2 < tuple2_size)
+		if constexpr (Index1 < tuple1_size && Index2 < tuple2_size)
 		{
 			using type1 = typename std::tuple_element_t<Index1, Pack1>;
 			using type2 = typename std::tuple_element_t<Index2, Pack2>;
-			if constexpr(type1::id == type2::id)
+			if constexpr(
+				compare_equal_metric_v<typename type1::metric_t, typename type2::metric_t>
+				)
 			{
 				if constexpr(std::is_same_v<typename type1::standard_t, typename type2::standard_t>)
 				{
@@ -164,7 +170,9 @@ private:
 			}
 			else
 			{
-				if constexpr(type1::id < type2::id)
+				if constexpr(
+					compare_less_metric_v<typename type1::metric_t, typename type2::metric_t>
+					)
 				{
 					return check<Index1 + 1, Index2>();
 				}
@@ -199,12 +207,14 @@ private:
 	{
 		if constexpr (Index1 < tuple1_size)
 		{
-			if constexpr(Index2 < tuple2_size)
+			if constexpr (Index2 < tuple2_size)
 			{
 				using type1 = typename std::tuple_element_t<Index1, Pack1>;
 				using type2 = typename std::tuple_element_t<Index2, Pack2>;
 
-				if constexpr(type1::id == type2::id)
+				if constexpr(
+					compare_equal_metric_v<typename type1::metric_t, typename type2::metric_t>
+					)
 				{
 					constexpr int8_t res_rank = type1::rank + type2::rank;
 					if constexpr(res_rank == 0)
@@ -222,7 +232,9 @@ private:
 				}
 				else
 				{
-					if constexpr(type1::id < type2::id)
+					if constexpr(
+						compare_less_metric_v<typename type1::metric_t, typename type2::metric_t>
+						)
 					{
 						return merge<
 							decltype(
@@ -283,7 +295,9 @@ private:
 				using type1 = typename std::tuple_element_t<Index1, Pack1>;
 				using type2 = typename std::tuple_element_t<Index2, Pack2>;
 
-				if constexpr(type1::id == type2::id && type1::base_gauge == type2::base_gauge)
+				if constexpr(
+					compare_equal_metric_v<typename type1::metric_t, typename type2::metric_t>
+					&& type1::base_gauge == type2::base_gauge)
 				{
 					constexpr int8_t res_rank = type1::rank + type2::rank;
 					if constexpr(res_rank == 0)
@@ -301,7 +315,11 @@ private:
 				}
 				else
 				{
-					if constexpr(type1::id == type2::id ? type1::base_gauge < type2::base_gauge : type1::id < type2::id)
+					if constexpr(
+						compare_equal_metric_v<typename type1::metric_t, typename type2::metric_t>
+						? type1::base_gauge < type2::base_gauge :
+						compare_less_metric_v<typename type1::metric_t, typename type2::metric_t>
+						)
 					{
 						return merge<
 							decltype(

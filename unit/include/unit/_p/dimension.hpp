@@ -29,8 +29,7 @@
 #include <type_traits>
 
 #include "utils.hpp"
-#include "unit_id.hpp"
-
+#include "metric_type.hpp"
 
 namespace unit::_p
 {
@@ -38,8 +37,9 @@ namespace unit::_p
 //check if structures have specific elements
 template <typename, typename = void>
 struct has_unit_id: std::false_type {};
+
 template <typename Type>
-struct has_unit_id<Type, std::enable_if_t<std::is_same_v<decltype(Type::id), const unit_id>, void>>: std::true_type {};
+struct has_unit_id<Type, std::enable_if_t<is_metric_t<typename Type::metric_t>::value, void>>: std::true_type {};
 
 template <typename, typename = void>
 struct has_gauge: std::false_type {};
@@ -91,7 +91,7 @@ template <c_standard Standard, int8_t Rank>
 struct dimension
 {
 	using standard_t = Standard;
-	static constexpr unit_id		id			= standard_t::id;
+	using metric_t = Standard::metric_t;
 	static constexpr int8_t			rank		= Rank;
 	static constexpr long double	base_gauge	= standard_t::gauge;
 	static constexpr long double	factor		= pow(base_gauge, rank);
@@ -120,7 +120,11 @@ concept c_dimension = is_dimension<T>::value;
 //----
 template <c_dimension T, c_dimension U>
 struct less<T, U>: public std::conditional_t<
-	(T::id == U::id) ? (T::base_gauge < U::base_gauge) : (T::id < U::id)
+	//(T::id == U::id)
+	compare_equal_metric_v<typename T::metric_t, typename U::metric_t>
+	? (T::base_gauge < U::base_gauge) :
+	compare_less_metric_v<typename T::metric_t, typename U::metric_t>
+	//(T::id < U::id)
 	, std::true_type, std::false_type>
 {};
 
@@ -134,7 +138,7 @@ struct invert<T>
 template<c_dimension T>
 struct standardize
 {
-	using type = dimension<typename standard::SI_standard<T::id>::type, T::rank>;
+	using type = dimension<typename standard::SI_standard<typename T::metric_t>::type, T::rank>;
 };
 
 

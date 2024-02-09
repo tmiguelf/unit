@@ -73,7 +73,10 @@ public:
 	{}
 
 	template<c_ValidFP Type2, c_proxy_property Prop2> requires
-		(!std::is_same_v<Property, Prop2> && (Property::standard_t::id == Prop2::standard_t::id))
+		(!std::is_same_v<Property, Prop2> && (
+			compare_equal_metric_v<Property::standard_t::metric_t, Prop2::standard_t::metric_t>
+			//Property::standard_t::id == Prop2::standard_t::id
+			))
 	inline constexpr Unit_proxy(const Unit_proxy<Type2, Prop2>& p_other)
 		: Unit_proxy(p_other.to_unit())
 	{}
@@ -137,7 +140,10 @@ public:
 	}
 
 	template<c_ValidFP Type2, c_proxy_property Prop2> requires
-		(!std::is_same_v<Property, Prop2> && (Property::standard_t::id == Prop2::standard_t::id))
+		(!std::is_same_v<Property, Prop2> && (
+			compare_equal_metric_v<Property::standard_t::metric_t, Prop2::standard_t::metric_t>
+			//Property::standard_t::id == Prop2::standard_t::id
+			))
 	inline constexpr auto operator - (const Unit_proxy<Type2, Prop2>& p_other) const
 	{
 		return to_unit() - p_other;

@@ -25,12 +25,22 @@
 
 #pragma once
 
-#include <unit/_p/unit_id.hpp>
+#include <unit/_p/metric_type.hpp>
 
 namespace unit::standard
 {
 
-struct digital_info_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::digital_info; };
+
+struct digital_info_metric final: public ::unit::_p::metric_base_t
+{
+	static constexpr std::u8string_view metric_name = u8"digital_info"sv;
+};
+
+
+struct digital_info_standard
+{
+	using metric_t = digital_info_metric;
+};
 
 
 struct bit final: public digital_info_standard
@@ -59,7 +69,7 @@ struct octlet final: public digital_info_standard
 };
 
 template<>
-struct SI_standard<::unit::_p::unit_id::digital_info>
+struct SI_standard<digital_info_metric>
 {
 	using type = bit;
 	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");

@@ -41,9 +41,6 @@
     <ClInclude Include="include\unit\_p\dimension.hpp">
       <Filter>Header Files\_p</Filter>
     </ClInclude>
-    <ClInclude Include="include\unit\_p\unit_id.hpp">
-      <Filter>Header Files\_p</Filter>
-    </ClInclude>
     <ClInclude Include="include\unit\standard\standard_mass.hpp">
       <Filter>Header Files\standard</Filter>
     </ClInclude>
@@ -157,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="include\unit\alias_flow_mass.hpp">
       <Filter>Header Files\alias</Filter>
+    </ClInclude>
+    <ClInclude Include="include\unit\_p\metric_type.hpp">
+      <Filter>Header Files\_p</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -25,12 +25,20 @@
 
 #pragma once
 
-#include <unit/_p/unit_id.hpp>
+#include <unit/_p/metric_type.hpp>
 
 namespace unit::standard
 {
 
-struct temperature_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::temperature; };
+struct temperature_metric final: public ::unit::_p::metric_base_t
+{
+	static constexpr std::u8string_view metric_name = u8"temperature"sv;
+};
+
+struct temperature_standard
+{
+	using metric_t = temperature_metric;
+};
 
 
 struct kelvin final: public temperature_standard
@@ -44,7 +52,7 @@ struct rankine final: public temperature_standard
 };
 
 template<>
-struct SI_standard<::unit::_p::unit_id::temperature>
+struct SI_standard<temperature_metric>
 {
 	using type = kelvin;
 	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");

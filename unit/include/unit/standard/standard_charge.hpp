@@ -25,12 +25,20 @@
 
 #pragma once
 
-#include <unit/_p/unit_id.hpp>
+#include <unit/_p/metric_type.hpp>
 
 namespace unit::standard
 {
 
-struct charge_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::charge; };
+struct charge_metric final: public ::unit::_p::metric_base_t
+{
+	static constexpr std::u8string_view metric_name = u8"charge"sv;
+};
+
+struct charge_standard
+{
+	using metric_t = charge_metric;
+};
 
 
 struct coloumb final: public charge_standard
@@ -40,7 +48,7 @@ struct coloumb final: public charge_standard
 
 
 template<>
-struct SI_standard<::unit::_p::unit_id::charge>
+struct SI_standard<charge_metric>
 {
 	using type = coloumb;
 	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");

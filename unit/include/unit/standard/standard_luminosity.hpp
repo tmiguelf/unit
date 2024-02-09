@@ -25,12 +25,22 @@
 
 #pragma once
 
-#include <unit/_p/unit_id.hpp>
+#include <unit/_p/metric_type.hpp>
 
 namespace unit::standard
 {
 
-struct luminous_intensity_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::luminous_intensity; };
+struct luminosity_metric final: public ::unit::_p::metric_base_t
+{
+	static constexpr std::u8string_view metric_name = u8"luminosity"sv;
+};
+
+
+
+struct luminous_intensity_standard
+{
+	using metric_t = luminosity_metric;
+};
 
 
 struct candela final: public luminous_intensity_standard
@@ -39,7 +49,7 @@ struct candela final: public luminous_intensity_standard
 };
 
 template<>
-struct SI_standard<::unit::_p::unit_id::luminous_intensity>
+struct SI_standard<luminosity_metric>
 {
 	using type = candela;
 	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");

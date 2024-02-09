@@ -25,12 +25,20 @@
 
 #pragma once
 
-#include <unit/_p/unit_id.hpp>
+#include <unit/_p/metric_type.hpp>
 
 namespace unit::standard
 {
 
-struct mass_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::mass; };
+struct mass_metric final: public ::unit::_p::metric_base_t
+{
+	static constexpr std::u8string_view metric_name = u8"mass"sv;
+};
+
+struct mass_standard
+{
+	using metric_t = mass_metric;
+};
 
 
 struct si_mass final: public mass_standard
@@ -55,7 +63,7 @@ struct ounce_av final: public mass_standard
 
 
 template<>
-struct SI_standard<::unit::_p::unit_id::mass>
+struct SI_standard<mass_metric>
 {
 	using type = si_mass;
 	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");

@@ -94,7 +94,7 @@
     <ClInclude Include="include\unit\unit.hpp" />
     <ClInclude Include="include\unit\_p\dimension.hpp" />
     <ClInclude Include="include\unit\_p\metric_pack.hpp" />
-    <ClInclude Include="include\unit\_p\unit_id.hpp" />
+    <ClInclude Include="include\unit\_p\metric_type.hpp" />
     <ClInclude Include="include\unit\_p\unit_proxy.hpp" />
     <ClInclude Include="include\unit\_p\unit_type.hpp" />
     <ClInclude Include="include\unit\_p\utils.hpp" />

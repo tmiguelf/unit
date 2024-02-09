@@ -27,12 +27,21 @@
 
 #include <MathLib/constants.hpp>
 
-#include <unit/_p/unit_id.hpp>
+#include <unit/_p/metric_type.hpp>
 
 namespace unit::standard
 {
 
-struct angle_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::angle; };
+struct angle_metric final: public ::unit::_p::metric_base_t
+{
+	static constexpr std::u8string_view metric_name = u8"angle"sv;
+};
+
+
+struct angle_standard
+{
+	using metric_t = angle_metric;
+};
 
 
 struct radian final: public angle_standard
@@ -66,7 +75,7 @@ struct turn final: public angle_standard
 };
 
 template<>
-struct SI_standard<::unit::_p::unit_id::angle>
+struct SI_standard<angle_metric>
 {
 	using type = radian;
 	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");

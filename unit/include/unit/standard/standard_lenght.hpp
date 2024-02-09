@@ -27,12 +27,20 @@
 
 #include "constants.hpp"
 
-#include <unit/_p/unit_id.hpp>
+#include <unit/_p/metric_type.hpp>
 
 namespace unit::standard
 {
 
-struct lenght_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::length; };
+struct lenght_metric final: public ::unit::_p::metric_base_t
+{
+	static constexpr std::u8string_view metric_name = u8"lenght"sv;
+};
+
+struct lenght_standard
+{
+	using metric_t = lenght_metric;
+};
 
 
 struct metre final: public lenght_standard
@@ -78,7 +86,7 @@ struct light_year: public lenght_standard
 
 
 template<>
-struct SI_standard<::unit::_p::unit_id::length>
+struct SI_standard<lenght_metric>
 {
 	using type = metre;
 	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");

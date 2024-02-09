@@ -25,12 +25,21 @@
 
 #pragma once
 
-#include <unit/_p/unit_id.hpp>
+#include <unit/_p/metric_type.hpp>
 
 namespace unit::standard
 {
 
-struct time_standard { static constexpr ::unit::_p::unit_id id = ::unit::_p::unit_id::time; };
+struct time_metric final: public ::unit::_p::metric_base_t
+{
+	static constexpr std::u8string_view metric_name = u8"time"sv;
+};
+
+
+struct time_standard
+{
+	using metric_t = time_metric;
+};
 
 struct second final: public time_standard
 {
@@ -48,7 +57,7 @@ struct hour final: public time_standard
 };
 
 template<>
-struct SI_standard<::unit::_p::unit_id::time>
+struct SI_standard<time_metric>
 {
 	using type = second;
 	static_assert(type::gauge == 1.l, "SI standard must have a gauge of 1");

@@ -34,7 +34,7 @@ namespace unit::_p
 {
 
 template<c_ValidFP Type, c_proxy_property Property>
-class Unit_proxy;
+class Offset_Unit;
 
 
 template<c_ValidFP Type, c_unit_pack Pack>
@@ -65,8 +65,8 @@ public:
 	{}
 
 	template<c_ValidFP Type2, c_proxy_property Prop2> requires
-		(is_compatible_unit_pack<unit_pack, typename Unit_proxy<Type2, Prop2>::unit_pack_t>::value)
-	inline constexpr Unit(const Unit_proxy<Type2, Prop2>& p_other)
+		(is_compatible_unit_pack<unit_pack, typename Offset_Unit<Type2, Prop2>::unit_pack_t>::value)
+	inline constexpr Unit(const Offset_Unit<Type2, Prop2>& p_other)
 		: Unit(p_other.to_unit())
 	{}
 
@@ -74,8 +74,8 @@ public:
 	inline Unit& operator = (const Unit&) = default;
 
 	template<c_ValidFP Type2, c_proxy_property Prop2> requires
-		(is_compatible_unit_pack<unit_pack, typename Unit_proxy<Type2, Prop2>::unit_pack_t>::value)
-	inline Unit& operator = (const Unit_proxy<Type2, Prop2>& p_other)
+		(is_compatible_unit_pack<unit_pack, typename Offset_Unit<Type2, Prop2>::unit_pack_t>::value)
+	inline Unit& operator = (const Offset_Unit<Type2, Prop2>& p_other)
 	{
 		return operator = (p_other.to_unit());
 	}
@@ -246,8 +246,8 @@ template <c_arithmethic valueL_t, c_ValidFP valueR_t, c_unit_pack Pack2>
 constexpr auto operator / (valueL_t p_left, const Unit<valueR_t, Pack2>& p_right)
 {
 	using val_t	= decltype(p_left / p_right.value());
-	using dim2	= typename inverse_tuple_pack<typename Pack2::dimension_pack>::type;
-	using scal2	= typename inverse_tuple_pack<typename Pack2::scalar_pack>::type;
+	using dim2	= typename inverse_pack<typename Pack2::dimension_pack>::type;
+	using scal2	= typename inverse_pack<typename Pack2::scalar_pack>::type;
 
 	return Unit<val_t, unit_pack<dim2, scal2>>{p_left / p_right.value()};
 }
@@ -264,15 +264,15 @@ constexpr auto operator / (valueL_t p_left, const Unit<valueR_t, Pack2>& p_right
 namespace unit
 {
 
-template<_p::c_ValidFP Type, _p::c_tuple Dimensions, _p::c_tuple Scalars>
+template<_p::c_ValidFP Type, core::c_pack Dimensions, core::c_pack Scalars>
 struct make_unit
 {
 private:
-	static_assert(!_p::tuple_find<_p::not_dimension, Dimensions>::value, "Dimension pack can only contain dimensions");
-	static_assert(!_p::tuple_find<_p::not_scalar, Scalars>::value, "Scalar pack can only contain scalars");
+	static_assert(!core::pack_contains_v<Dimensions, _p::not_dimension>, "Dimension pack can only contain dimensions");
+	static_assert(!core::pack_contains_v<Scalars, _p::not_scalar>, "Scalar pack can only contain scalars");
 
-	using sorted_dim	= typename _p::tuple_selection_sort<_p::less, Dimensions>::type;
-	using sorted_scal	= typename _p::tuple_selection_sort<_p::less, Scalars>::type;
+	using sorted_dim	= typename _p::pack_selection_sort<Dimensions, _p::less>::type;
+	using sorted_scal	= typename _p::pack_selection_sort<Scalars, _p::less>::type;
 
 public:
 	using type = _p::Unit<Type, _p::unit_pack<sorted_dim, sorted_scal>>;

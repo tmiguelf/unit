@@ -50,19 +50,19 @@ struct cubic_metres_in_pint
 //======== ======== Template Type ======== ========
 
 template <_p::c_ValidFP T>
-using cubic_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 3>>, std::tuple<>>::type;
+using cubic_metre_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 3>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using litre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 3>>, std::tuple<multi::deci<3>>>::type;
+using litre_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 3>>, core::pack<multi::deci<3>>>::type;
 
 template <_p::c_ValidFP T>
-using cubic_foot_t = typename make_unit<T, std::tuple<_p::dimension<standard::foot, 3>>, std::tuple<>>::type;
+using cubic_foot_t = typename make_unit<T, core::pack<_p::dimension<standard::foot, 3>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using gallon_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 3>>, std::tuple<_p::scalar<multi::cubic_metres_in_gallon, 1>>>::type;
+using gallon_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 3>>, core::pack<_p::scalar<multi::cubic_metres_in_gallon, 1>>>::type;
 
 template <_p::c_ValidFP T>
-using pint_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 3>>, std::tuple<_p::scalar<multi::cubic_metres_in_pint, 1>>>::type;
+using pint_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 3>>, core::pack<_p::scalar<multi::cubic_metres_in_pint, 1>>>::type;
 
 
 //======== ======== Default Type ======== ========

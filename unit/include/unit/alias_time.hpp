@@ -35,27 +35,27 @@ namespace unit
 //======== ======== Template Type ======== ========
 
 template <_p::c_ValidFP T>
-using second_t = typename make_unit<T, std::tuple<_p::dimension<standard::second, 1>>, std::tuple<>>::type;
+using second_t = typename make_unit<T, core::pack<_p::dimension<standard::second, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using minute_t = typename make_unit<T, std::tuple<_p::dimension<standard::minute, 1>>, std::tuple<>>::type;
+using minute_t = typename make_unit<T, core::pack<_p::dimension<standard::minute, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::hour, 1>>, std::tuple<>>::type;
-
-
-template <_p::c_ValidFP T>
-using nano_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::second, 1>>, std::tuple<multi::nano<1>>>::type;
-
-template <_p::c_ValidFP T>
-using micro_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::second, 1>>, std::tuple<multi::micro<1>>>::type;
-
-template <_p::c_ValidFP T>
-using milli_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::second, 1>>, std::tuple<multi::milli<1>>>::type;
+using hour_t = typename make_unit<T, core::pack<_p::dimension<standard::hour, 1>>, core::pack<>>::type;
 
 
 template <_p::c_ValidFP T>
-using hertz_t = typename make_unit<T, std::tuple<_p::dimension<standard::second, -1>>, std::tuple<>>::type;
+using nano_second_t = typename make_unit<T, core::pack<_p::dimension<standard::second, 1>>, core::pack<multi::nano<1>>>::type;
+
+template <_p::c_ValidFP T>
+using micro_second_t = typename make_unit<T, core::pack<_p::dimension<standard::second, 1>>, core::pack<multi::micro<1>>>::type;
+
+template <_p::c_ValidFP T>
+using milli_second_t = typename make_unit<T, core::pack<_p::dimension<standard::second, 1>>, core::pack<multi::milli<1>>>::type;
+
+
+template <_p::c_ValidFP T>
+using hertz_t = typename make_unit<T, core::pack<_p::dimension<standard::second, -1>>, core::pack<>>::type;
 
 
 //======== ======== Default Type ======== ========

@@ -95,7 +95,7 @@
     <ClInclude Include="include\unit\alias_time.hpp">
       <Filter>Header Files\alias</Filter>
     </ClInclude>
-    <ClInclude Include="include\unit\_p\unit_proxy.hpp">
+    <ClInclude Include="include\unit\_p\offset_unit.hpp">
       <Filter>Header Files\_p</Filter>
     </ClInclude>
     <ClInclude Include="include\unit\alias_acceleration.hpp">

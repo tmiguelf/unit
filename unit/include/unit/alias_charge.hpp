@@ -36,13 +36,13 @@ namespace unit
 //======== ======== Template Type ======== ========
 
 template <_p::c_ValidFP T>
-using coloumb_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<>>::type;
+using coloumb_t = typename make_unit<T, core::pack<_p::dimension<standard::coloumb, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using amper_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<_p::scalar<multi::seconds_in_hour, 1>>>::type;
+using amper_hour_t = typename make_unit<T, core::pack<_p::dimension<standard::coloumb, 1>>, core::pack<_p::scalar<multi::seconds_in_hour, 1>>>::type;
 
 template <_p::c_ValidFP T>
-using milli_amper_hour_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>>, std::tuple<multi::milli<1>, _p::scalar<multi::seconds_in_hour, 1>>>::type;
+using milli_amper_hour_t = typename make_unit<T, core::pack<_p::dimension<standard::coloumb, 1>>, core::pack<multi::milli<1>, _p::scalar<multi::seconds_in_hour, 1>>>::type;
 
 
 //======== ======== Default Type ======== ========

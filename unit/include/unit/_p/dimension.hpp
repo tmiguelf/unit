@@ -35,26 +35,44 @@ namespace unit::_p
 {
 
 //check if structures have specific elements
-template <typename, typename = void>
+template <typename>
 struct has_unit_id: std::false_type {};
 
-template <typename Type>
-struct has_unit_id<Type, std::enable_if_t<is_metric_t<typename Type::metric_t>::value, void>>: std::true_type {};
+template <typename Type> requires is_metric_t<typename Type::metric_t>::value
+struct has_unit_id<Type>: std::true_type {};
 
-template <typename, typename = void>
+
+template <typename>
+struct is_valid_gauge_type: std::false_type {};
+
+template <typename Type> requires std::is_floating_point_v<Type>
+struct is_valid_gauge_type<Type>: std::true_type {};
+
+template <typename Type>
+constexpr bool is_valid_gauge_type_v = is_valid_gauge_type<Type>::value;
+
+
+
+template <typename>
 struct has_gauge: std::false_type {};
-template <typename Type>
-struct has_gauge<Type, std::enable_if_t<std::is_same_v<decltype(Type::gauge), const long double>, void>>: std::true_type {};
 
-template <typename, typename = void>
+template <typename Type> requires is_valid_gauge_type_v<decltype(Type::gauge)>
+struct has_gauge<Type>: std::true_type {};
+
+
+template <typename>
 struct has_factor: std::false_type {};
-template <typename Type>
-struct has_factor<Type, std::enable_if_t<std::is_same_v<decltype(Type::factor), const long double>, void>>: std::true_type {};
 
-template <typename, typename = void>
+template <typename Type> requires is_valid_gauge_type_v<decltype(Type::factor)>
+struct has_factor<Type>: std::true_type {};
+
+
+
+template <typename>
 struct has_offset: std::false_type {};
-template <typename Type>
-struct has_offset<Type, std::enable_if_t<std::is_same_v<decltype(Type::offset), const long double>, void>>: std::true_type {};
+
+template <typename Type> requires is_valid_value_type_v<decltype(Type::offset)>
+struct has_offset<Type>: std::true_type {};
 
 
 //A measurment standard requires a gauge, and must refer to a specific physical property
@@ -68,10 +86,12 @@ template<typename T>
 concept c_mutiplier = has_factor<T>::value;
 
 
-template <typename, typename = void>
+template <typename>
 struct has_standard: std::false_type {};
-template <typename Type>
-struct has_standard<Type, std::enable_if_t<is_standard_v<typename Type::standard_t>, void>>: std::true_type {};
+
+template <typename Type> requires is_standard_v<typename Type::standard_t>
+struct has_standard<Type>: std::true_type {};
+
 
 //for biased units like Celcius or farenheit
 template<typename T>
@@ -191,6 +211,6 @@ struct invert<T>
 //======== ======== Common to dimensions and scalars ======== ========
 
 template<typename T>
-struct get_factor { static constexpr long double get() { return T::factor; }};
+struct get_factor { static constexpr auto get() { return T::factor; }};
 
 } //namespace unit::_p

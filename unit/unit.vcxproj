@@ -47,6 +47,7 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)locations.props" />
     <Import Project="$(quickMSBuildPath)default.cpp.props" />
+    <Import Project="$(CoreLibPath)CoreLib.include.props" />
     <Import Project="$(MathLibPath)MathLib.include.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -95,7 +96,7 @@
     <ClInclude Include="include\unit\_p\dimension.hpp" />
     <ClInclude Include="include\unit\_p\metric_pack.hpp" />
     <ClInclude Include="include\unit\_p\metric_type.hpp" />
-    <ClInclude Include="include\unit\_p\unit_proxy.hpp" />
+    <ClInclude Include="include\unit\_p\offset_unit.hpp" />
     <ClInclude Include="include\unit\_p\unit_type.hpp" />
     <ClInclude Include="include\unit\_p\utils.hpp" />
   </ItemGroup>

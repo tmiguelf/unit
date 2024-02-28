@@ -34,19 +34,19 @@ namespace unit
 //======== ======== Template Type ======== ========
 
 template <_p::c_ValidFP T>
-using radian_t = typename make_unit<T, std::tuple<_p::dimension<standard::radian, 1>>, std::tuple<>>::type;
+using radian_t = typename make_unit<T, core::pack<_p::dimension<standard::radian, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using degree_t = typename make_unit<T, std::tuple<_p::dimension<standard::degree, 1>>, std::tuple<>>::type;
+using degree_t = typename make_unit<T, core::pack<_p::dimension<standard::degree, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using arc_minute_t = typename make_unit<T, std::tuple<_p::dimension<standard::arc_minute, 1>>, std::tuple<>>::type;
+using arc_minute_t = typename make_unit<T, core::pack<_p::dimension<standard::arc_minute, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using arc_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::arc_second, 1>>, std::tuple<>>::type;
+using arc_second_t = typename make_unit<T, core::pack<_p::dimension<standard::arc_second, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using turn_t = typename make_unit<T, std::tuple<_p::dimension<standard::turn, 1>>, std::tuple<>>::type;
+using turn_t = typename make_unit<T, core::pack<_p::dimension<standard::turn, 1>>, core::pack<>>::type;
 
 
 //======== ======== Default Type ======== ========

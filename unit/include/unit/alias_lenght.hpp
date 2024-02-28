@@ -40,45 +40,45 @@ constexpr bool val = _p::is_dimension<_p::dimension<standard::metre, 1>>::value;
 
 
 template <_p::c_ValidFP T>
-using metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>>, std::tuple<>>::type;
+using metre_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using foot_t = typename make_unit<T, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
+using foot_t = typename make_unit<T, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using inch_t = typename make_unit<T, std::tuple<_p::dimension<standard::inch, 1>>, std::tuple<>>::type;
+using inch_t = typename make_unit<T, core::pack<_p::dimension<standard::inch, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using yard_t = typename make_unit<T, std::tuple<_p::dimension<standard::yard, 1>>, std::tuple<>>::type;
+using yard_t = typename make_unit<T, core::pack<_p::dimension<standard::yard, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using mile_t = typename make_unit<T, std::tuple<_p::dimension<standard::mile, 1>>, std::tuple<>>::type;
+using mile_t = typename make_unit<T, core::pack<_p::dimension<standard::mile, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using nautical_mile_t = typename make_unit<T, std::tuple<_p::dimension<standard::nautical_mile, 1>>, std::tuple<>>::type;
+using nautical_mile_t = typename make_unit<T, core::pack<_p::dimension<standard::nautical_mile, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using light_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::light_second, 1>>, std::tuple<>>::type;
+using light_second_t = typename make_unit<T, core::pack<_p::dimension<standard::light_second, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using light_year_t = typename make_unit<T, std::tuple<_p::dimension<standard::light_year, 1>>, std::tuple<>>::type;
+using light_year_t = typename make_unit<T, core::pack<_p::dimension<standard::light_year, 1>>, core::pack<>>::type;
 
 
 
 template <_p::c_ValidFP T>
-using nano_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>>, std::tuple<multi::nano<1>>>::type;
+using nano_metre_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 1>>, core::pack<multi::nano<1>>>::type;
 
 template <_p::c_ValidFP T>
-using micro_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>>, std::tuple<multi::micro<1>>>::type;
+using micro_metre_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 1>>, core::pack<multi::micro<1>>>::type;
 
 template <_p::c_ValidFP T>
-using milli_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>>, std::tuple<multi::milli<1>>>::type;
+using milli_metre_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 1>>, core::pack<multi::milli<1>>>::type;
 
 template <_p::c_ValidFP T>
-using centi_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>>, std::tuple<multi::centi<1>>>::type;
+using centi_metre_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 1>>, core::pack<multi::centi<1>>>::type;
 
 template <_p::c_ValidFP T>
-using kilo_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 1>>, std::tuple<multi::kilo<1>>>::type;
+using kilo_metre_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 1>>, core::pack<multi::kilo<1>>>::type;
 
 //======== ======== Default Type ======== ========
 

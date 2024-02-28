@@ -34,35 +34,35 @@ namespace unit
 
 //======== ======== Template Type ======== ========
 template <_p::c_ValidFP T>
-using bit_t = typename make_unit<T, std::tuple<_p::dimension<standard::bit, 1>>, std::tuple<>>::type;
+using bit_t = typename make_unit<T, core::pack<_p::dimension<standard::bit, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using byte_t = typename make_unit<T, std::tuple<_p::dimension<standard::byte, 1>>, std::tuple<>>::type;
+using byte_t = typename make_unit<T, core::pack<_p::dimension<standard::byte, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using doublet_t = typename make_unit<T, std::tuple<_p::dimension<standard::doublet, 1>>, std::tuple<>>::type;
+using doublet_t = typename make_unit<T, core::pack<_p::dimension<standard::doublet, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using quadlet_t = typename make_unit<T, std::tuple<_p::dimension<standard::quadlet, 1>>, std::tuple<>>::type;
+using quadlet_t = typename make_unit<T, core::pack<_p::dimension<standard::quadlet, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using octlet_t = typename make_unit<T, std::tuple<_p::dimension<standard::octlet, 1>>, std::tuple<>>::type;
+using octlet_t = typename make_unit<T, core::pack<_p::dimension<standard::octlet, 1>>, core::pack<>>::type;
 
 
 template <_p::c_ValidFP T>
-using kibibyte_t = typename make_unit<T, std::tuple<_p::dimension<standard::byte, 1>>, std::tuple<multi::kibi<1>>>::type;
+using kibibyte_t = typename make_unit<T, core::pack<_p::dimension<standard::byte, 1>>, core::pack<multi::kibi<1>>>::type;
 
 template <_p::c_ValidFP T>
-using mebibyte_t = typename make_unit<T, std::tuple<_p::dimension<standard::byte, 1>>, std::tuple<multi::mebi<1>>>::type;
+using mebibyte_t = typename make_unit<T, core::pack<_p::dimension<standard::byte, 1>>, core::pack<multi::mebi<1>>>::type;
 
 template <_p::c_ValidFP T>
-using gibibyte_t = typename make_unit<T, std::tuple<_p::dimension<standard::byte, 1>>, std::tuple<multi::gibi<1>>>::type;
+using gibibyte_t = typename make_unit<T, core::pack<_p::dimension<standard::byte, 1>>, core::pack<multi::gibi<1>>>::type;
 
 template <_p::c_ValidFP T>
-using tebibyte_t = typename make_unit<T, std::tuple<_p::dimension<standard::byte, 1>>, std::tuple<multi::tebi<1>>>::type;
+using tebibyte_t = typename make_unit<T, core::pack<_p::dimension<standard::byte, 1>>, core::pack<multi::tebi<1>>>::type;
 
 template <_p::c_ValidFP T>
-using pebibyte_t = typename make_unit<T, std::tuple<_p::dimension<standard::byte, 1>>, std::tuple<multi::pebi<1>>>::type;
+using pebibyte_t = typename make_unit<T, core::pack<_p::dimension<standard::byte, 1>>, core::pack<multi::pebi<1>>>::type;
 
 //======== ======== Default Type ======== ========
 

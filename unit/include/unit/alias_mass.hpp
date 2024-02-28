@@ -35,19 +35,19 @@ namespace unit
 //======== ======== Template Type ======== ========
 
 template <_p::c_ValidFP T>
-using kilogram_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>>, std::tuple<>>::type;
+using kilogram_t = typename make_unit<T, core::pack<_p::dimension<standard::si_mass, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using gram_t = typename make_unit<T, std::tuple<_p::dimension<standard::gram, 1>>, std::tuple<>>::type;
+using gram_t = typename make_unit<T, core::pack<_p::dimension<standard::gram, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using pound_av_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>>, std::tuple<>>::type;
+using pound_av_t = typename make_unit<T, core::pack<_p::dimension<standard::pound_av, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using ounce_av_t = typename make_unit<T, std::tuple<_p::dimension<standard::ounce_av, 1>>, std::tuple<>>::type;
+using ounce_av_t = typename make_unit<T, core::pack<_p::dimension<standard::ounce_av, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using tonne_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>>, std::tuple<_p::scalar<multi::E, 3>>>::type;
+using tonne_t = typename make_unit<T, core::pack<_p::dimension<standard::si_mass, 1>>, core::pack<_p::scalar<multi::E, 3>>>::type;
 
 //======== ======== Default Type ======== ========
 

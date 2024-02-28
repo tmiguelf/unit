@@ -42,22 +42,22 @@ struct square_yards_in_acre
 
 //======== ======== Template Type ======== ========
 template <_p::c_ValidFP T>
-using square_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<>>::type;
+using square_metre_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 2>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using square_foot_t = typename make_unit<T, std::tuple<_p::dimension<standard::foot, 2>>, std::tuple<>>::type;
+using square_foot_t = typename make_unit<T, core::pack<_p::dimension<standard::foot, 2>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using hectare_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<multi::hecto<2>>>::type;
+using hectare_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 2>>, core::pack<multi::hecto<2>>>::type;
 
 template <_p::c_ValidFP T>
-using acre_t = typename make_unit<T, std::tuple<_p::dimension<standard::yard, 2>>, std::tuple<_p::scalar<multi::square_yards_in_acre, 1>>>::type;
+using acre_t = typename make_unit<T, core::pack<_p::dimension<standard::yard, 2>>, core::pack<_p::scalar<multi::square_yards_in_acre, 1>>>::type;
 
 template <_p::c_ValidFP T>
-using square_mile_t = typename make_unit<T, std::tuple<_p::dimension<standard::mile, 2>>, std::tuple<>>::type;
+using square_mile_t = typename make_unit<T, core::pack<_p::dimension<standard::mile, 2>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using square_kilo_metre_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 2>>, std::tuple<multi::kilo<2>>>::type;
+using square_kilo_metre_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 2>>, core::pack<multi::kilo<2>>>::type;
 
 //======== ======== Default Type ======== ========
 

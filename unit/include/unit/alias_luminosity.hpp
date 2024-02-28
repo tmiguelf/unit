@@ -34,7 +34,7 @@ namespace unit
 //======== ======== Template Type ======== ========
 
 template <_p::c_ValidFP T>
-using candela_t = typename make_unit<T, std::tuple<_p::dimension<standard::candela, 1>>, std::tuple<>>::type;
+using candela_t = typename make_unit<T, core::pack<_p::dimension<standard::candela, 1>>, core::pack<>>::type;
 
 
 //======== ======== Default Type ======== ========

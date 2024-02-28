@@ -49,11 +49,11 @@ TEST(type_conversion, invariant_multiply_composition)
 		constexpr double val2 = 4.1;
 		constexpr auto val_expect = val1 * val2;
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::pound_av, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::pound_av, 1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} * type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::foot, 1>, _p::dimension<standard::pound_av, 1>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::foot, 1>, _p::dimension<standard::pound_av, 1>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(binarySame(result.value(), val_expect));
@@ -65,11 +65,11 @@ TEST(type_conversion, invariant_multiply_composition)
 		constexpr double val2 = 4.1;
 		constexpr auto val_expect = val1 * val2;
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::pound_av, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::pound_av, 1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} * type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::foot, 1>, _p::dimension<standard::pound_av, 1>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::foot, 1>, _p::dimension<standard::pound_av, 1>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(binarySame(result.value(), val_expect));
@@ -81,11 +81,11 @@ TEST(type_conversion, invariant_multiply_composition)
 		constexpr double val2 = 4.1;
 		constexpr auto val_expect = val1 * val2;
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, -5>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, -5>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} * type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, -3>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, -3>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(binarySame(result.value(), val_expect));
@@ -97,11 +97,11 @@ TEST(type_conversion, invariant_multiply_composition)
 		constexpr long double val2 = 4.1l;
 		constexpr auto val_expect = val1 * val2;
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, -5>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, -5>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} * type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, -3>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, -3>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(binarySame(result.value(), val_expect));
@@ -113,8 +113,8 @@ TEST(type_conversion, invariant_multiply_composition)
 		constexpr long double val2 = 4.1l;
 		constexpr auto val_expect = val1 * val2;
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::foot, -4>, _p::dimension<standard::rankine, -2>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::foot, -4>, _p::dimension<standard::rankine, -2>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} * type2_test_t{val2};
 		using expected_type_t = std::remove_cv_t<decltype(val_expect)>;
@@ -132,11 +132,11 @@ TEST(type_conversion, invariant_divide_composition)
 		constexpr double val2 = 4.1;
 		constexpr auto val_expect = val1 / val2;
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::pound_av, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::pound_av, 1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} / type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::foot, 1>, _p::dimension<standard::pound_av, -1>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::foot, 1>, _p::dimension<standard::pound_av, -1>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(binarySame(result.value(), val_expect));
@@ -148,11 +148,11 @@ TEST(type_conversion, invariant_divide_composition)
 		constexpr double val2 = 4.1;
 		constexpr auto val_expect = val1 / val2;
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::pound_av, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::pound_av, 1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} / type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::foot, 1>, _p::dimension<standard::pound_av, -1>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::foot, 1>, _p::dimension<standard::pound_av, -1>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(binarySame(result.value(), val_expect));
@@ -164,11 +164,11 @@ TEST(type_conversion, invariant_divide_composition)
 		constexpr double val2 = 4.1;
 		constexpr auto val_expect = val1 / val2;
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, -5>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, -5>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} / type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::pound_av, 3>, _p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 7>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::pound_av, 3>, _p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 7>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(binarySame(result.value(), val_expect));
@@ -180,11 +180,11 @@ TEST(type_conversion, invariant_divide_composition)
 		constexpr long double val2 = 4.1l;
 		constexpr auto val_expect = val1 / val2;
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, -5>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, -5>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} / type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::pound_av, 3>, _p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 7>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::pound_av, 3>, _p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 7>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(binarySame(result.value(), val_expect));
@@ -196,8 +196,8 @@ TEST(type_conversion, invariant_divide_composition)
 		constexpr long double val2 = 4.1l;
 		constexpr auto val_expect = val1 / val2;
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::foot, 4>, _p::dimension<standard::rankine, 2>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} / type2_test_t{val2};
 
@@ -217,8 +217,8 @@ TEST(type_conversion, multiply)
 		constexpr auto val_res = (val1 * val2);
 		constexpr decltype(val_res) val_expect = val_res / (5280.0);
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, -1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, -1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} * type2_test_t{val2};
 
@@ -233,8 +233,8 @@ TEST(type_conversion, multiply)
 		constexpr auto val_res = (val1 * val2);
 		constexpr decltype(val_res) val_expect = val_res * (4096.0 / (5280.0 * 5280.0));
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, -2>, _p::dimension<standard::pound_av, 3>, _p::dimension<standard::rankine, -1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, -2>, _p::dimension<standard::pound_av, 3>, _p::dimension<standard::rankine, -1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} * type2_test_t{val2};
 
@@ -250,11 +250,11 @@ TEST(type_conversion, multiply)
 		constexpr auto val_res = (val1 * val2);
 		constexpr decltype(val_res) val_expect = val_res * (.3048 * 1609.344);
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, 1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} * type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::SI_standard<standard::lenght_metric>::type, 2>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::SI_standard<standard::lenght_metric>::type, 2>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(closeEnough(result.value(), val_expect, std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect));
@@ -268,11 +268,11 @@ TEST(type_conversion, multiply)
 		constexpr decltype(val_res) val_expect = val_res * ((1609.344 * .45359237l * .45359237l * 16. * 16. * 9.)
 			/ (.3048 * .3048 * .3048 * 5. ));
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, -3>, _p::dimension<standard::ounce_av, -2>, _p::dimension<standard::kelvin, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 1>, _p::dimension<standard::pound_av, 4>, _p::dimension<standard::rankine, -1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, -3>, _p::dimension<standard::ounce_av, -2>, _p::dimension<standard::kelvin, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, 1>, _p::dimension<standard::pound_av, 4>, _p::dimension<standard::rankine, -1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} * type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::SI_standard<standard::lenght_metric>::type, -2>, _p::dimension<standard::SI_standard<standard::mass_metric>::type, 2>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::SI_standard<standard::lenght_metric>::type, -2>, _p::dimension<standard::SI_standard<standard::mass_metric>::type, 2>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(closeEnough(result.value(), val_expect, std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect * 3. * ld_extra));
@@ -290,8 +290,8 @@ TEST(type_conversion, divide)
 		constexpr auto val_res = (val1 / val2);
 		constexpr decltype(val_res) val_expect = val_res / (5280.0);
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, 1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} / type2_test_t{val2};
 
@@ -306,8 +306,8 @@ TEST(type_conversion, divide)
 		constexpr auto val_res = (val1 / val2);
 		constexpr decltype(val_res) val_expect = val_res * (4096.0 / (5280.0 * 5280.0));
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 2>, _p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, 2>, _p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} / type2_test_t{val2};
 
@@ -322,11 +322,11 @@ TEST(type_conversion, divide)
 		constexpr auto val_res = (val1 / val2);
 		constexpr decltype(val_res) val_expect = val_res * (.3048 * 1609.344);
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, -1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, -1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} / type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::SI_standard<standard::lenght_metric>::type, 2>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::SI_standard<standard::lenght_metric>::type, 2>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(closeEnough(result.value(), val_expect, std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect)) << result.value() << " " << val_expect;
@@ -340,11 +340,11 @@ TEST(type_conversion, divide)
 		constexpr decltype(val_res) val_expect = val_res * ((1609.344 * .45359237l * .45359237l * 16. * 16. * 9.)
 			/ (.3048 * .3048 * .3048 * 5. ));
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, -3>, _p::dimension<standard::ounce_av, -2>, _p::dimension<standard::kelvin, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, -1>, _p::dimension<standard::pound_av, -4>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, -3>, _p::dimension<standard::ounce_av, -2>, _p::dimension<standard::kelvin, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, -1>, _p::dimension<standard::pound_av, -4>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
 
 		constexpr auto result = type1_test_t{val1} / type2_test_t{val2};
-		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, std::tuple<_p::dimension<standard::SI_standard<standard::lenght_metric>::type, -2>, _p::dimension<standard::SI_standard<standard::mass_metric>::type, 2>>, std::tuple<>>::type;
+		using expected_type_t = typename make_unit<std::remove_cv_t<decltype(val_expect)>, core::pack<_p::dimension<standard::SI_standard<standard::lenght_metric>::type, -2>, _p::dimension<standard::SI_standard<standard::mass_metric>::type, 2>>, core::pack<>>::type;
 
 		ASSERT_TRUE((std::is_same_v<decltype(result), const expected_type_t>));
 		ASSERT_TRUE(closeEnough(result.value(), val_expect, std::numeric_limits<decltype(val_expect)>::epsilon() * val_expect * 3. * ld_extra));
@@ -361,8 +361,8 @@ TEST(type_conversion, add_assign)
 		std::remove_cv_t<decltype(val1)> val_expect = val1;
 		val_expect += (val2 * 5280.);
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, 1>>, core::pack<>>::type;
 
 		type1_test_t result{val1};
 		constexpr type2_test_t aux{val2};
@@ -379,8 +379,8 @@ TEST(type_conversion, add_assign)
 		std::remove_cv_t<decltype(val1)> val_expect = val1;
 		val_expect += static_cast<decltype(val1)>(val2 * 5280. * 5280. / 4096.);
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 2>, _p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, 2>, _p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
 
 		type1_test_t result{val1};
 		constexpr type2_test_t aux{val2};
@@ -400,8 +400,8 @@ TEST(type_conversion, subtract_assign)
 		std::remove_cv_t<decltype(val1)> val_expect = val1;
 		val_expect -= (val2 * 5280.);
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, 1>>, core::pack<>>::type;
 
 		type1_test_t result{val1};
 		constexpr type2_test_t aux{val2};
@@ -418,8 +418,8 @@ TEST(type_conversion, subtract_assign)
 		std::remove_cv_t<decltype(val1)> val_expect = val1;
 		val_expect -= static_cast<decltype(val1)>(val2 * 5280. * 5280. / 4096.);
 
-		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, std::tuple<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
-		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, std::tuple<_p::dimension<standard::mile, 2>, _p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
+		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, 2>, _p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
 
 		type1_test_t result{val1};
 		constexpr type2_test_t aux{val2};

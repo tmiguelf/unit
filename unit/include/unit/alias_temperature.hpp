@@ -27,7 +27,7 @@
 
 #include "standard/standard_temperature.hpp"
 #include "_p/unit_type.hpp"
-#include "_p/unit_proxy.hpp"
+#include "_p/offset_unit.hpp"
 
 namespace unit
 {
@@ -35,16 +35,16 @@ namespace unit
 //======== ======== Template Type ======== ========
 
 template <_p::c_ValidFP T>
-using kelvin_t = typename make_unit<T, std::tuple<_p::dimension<standard::kelvin, 1>>, std::tuple<>>::type;
+using kelvin_t = typename make_unit<T, core::pack<_p::dimension<standard::kelvin, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using rankine_t = typename make_unit<T, std::tuple<_p::dimension<standard::rankine, 1>>, std::tuple<>>::type;
+using rankine_t = typename make_unit<T, core::pack<_p::dimension<standard::rankine, 1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using celcius_t = _p::Unit_proxy<T, standard::celcius>;
+using celcius_t = _p::Offset_Unit<T, standard::celcius>;
 
 template <_p::c_ValidFP T>
-using fahrenheit_t = _p::Unit_proxy<T, standard::fahrenheit>;
+using fahrenheit_t = _p::Offset_Unit<T, standard::fahrenheit>;
 
 
 //======== ======== Default Type ======== ========

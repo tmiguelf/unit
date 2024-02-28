@@ -56,31 +56,31 @@ struct atmosphere_factor
 
   //======== ======== Template Type ======== ========
 template <_p::c_ValidFP T>
-using pascal_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;
+using pascal_t = typename make_unit<T, core::pack<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using kilopascal_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, std::tuple<multi::kilo<1>>>::type;
+using kilopascal_t = typename make_unit<T, core::pack<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, core::pack<multi::kilo<1>>>::type;
 
 template <_p::c_ValidFP T>
-using bar_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::E, 5>>>::type;
+using bar_t = typename make_unit<T, core::pack<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, core::pack<_p::scalar<multi::E, 5>>>::type;
 
 template <_p::c_ValidFP T>
-using pound_av_force_per_square_inch_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::inch, -1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::g0_si, 1>, _p::scalar<multi::inches_in_meter, 1>>>::type;
+using pound_av_force_per_square_inch_t = typename make_unit<T, core::pack<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::inch, -1>, _p::dimension<standard::second, -2>>, core::pack<_p::scalar<multi::g0_si, 1>, _p::scalar<multi::inches_in_meter, 1>>>::type;
 
 template <_p::c_ValidFP T>
-using inch_mercury32_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::inch_mercury32_factor, 1>>>::type;
+using inch_mercury32_t = typename make_unit<T, core::pack<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, core::pack<_p::scalar<multi::inch_mercury32_factor, 1>>>::type;
 
 template <_p::c_ValidFP T>
-using inch_mercury60_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::inch_mercury60_factor, 1>>>::type;
+using inch_mercury60_t = typename make_unit<T, core::pack<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, core::pack<_p::scalar<multi::inch_mercury60_factor, 1>>>::type;
 
 template <_p::c_ValidFP T>
 using inch_mercury_t = inch_mercury32_t<T>;
 
 template <_p::c_ValidFP T>
-using atmosphere_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, std::tuple<_p::scalar<multi::atmosphere_factor, 1>>>::type;
+using atmosphere_t = typename make_unit<T, core::pack<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, -1>, _p::dimension<standard::second, -2>>, core::pack<_p::scalar<multi::atmosphere_factor, 1>>>::type;
 
 template <_p::c_ValidFP T>
-using poundal_per_square_foot_t = typename make_unit<T, std::tuple<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::foot, -1>, _p::dimension<standard::second, -2>>, std::tuple<>>::type;
+using poundal_per_square_foot_t = typename make_unit<T, core::pack<_p::dimension<standard::pound_av, 1>, _p::dimension<standard::foot, -1>, _p::dimension<standard::second, -2>>, core::pack<>>::type;
 
 
 //======== ======== Default Type ======== ========

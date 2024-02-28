@@ -34,22 +34,22 @@ namespace unit::_p
 {
 
 /// \brief stores information about the unit
-template<c_tuple Dimensions, c_tuple Scalars>
+template<core::c_pack Dimensions, core::c_pack Scalars>
 struct unit_pack
 {
 public:
 	using dimension_pack = Dimensions;
 	using scalar_pack = Scalars;
 
-	static_assert(!tuple_find<not_dimension, dimension_pack>::value, "Dimension pack can only contain dimensions");
-	static_assert(!tuple_find<not_scalar, scalar_pack>::value, "Scalar pack can only contain scalars");
+	static_assert(!core::pack_contains_v<dimension_pack, not_dimension>, "Dimension pack can only contain dimensions");
+	static_assert(!core::pack_contains_v<scalar_pack, not_scalar>, "Scalar pack can only contain scalars");
 
-	static_assert(is_tuple_strictly_sorted<less, dimension_pack>::value, "Dimension must be packed and sorted");
-	static_assert(is_tuple_strictly_sorted<less, scalar_pack>::value, "Scalar must be packed and sorted");
+	static_assert(is_pack_strictly_sorted<dimension_pack, less>::value, "Dimension must be packed and sorted");
+	static_assert(is_pack_strictly_sorted<scalar_pack, less>::value, "Scalar must be packed and sorted");
 
-	static_assert(std::tuple_size_v<dimension_pack> != 0, "Dimension pack must not be empty");
+	static_assert(core::pack_count_v<dimension_pack> != 0, "Dimension pack must not be empty");
 
-	static constexpr long double gauge = tuple_multiply<get_factor, dimension_pack>::value * tuple_multiply<get_factor, scalar_pack>::value;
+	static constexpr long double gauge = pack_multiply<dimension_pack, get_factor>::value * pack_multiply<scalar_pack, get_factor>::value;
 };
 
 
@@ -66,25 +66,25 @@ template<typename T>
 concept c_unit_pack = is_unit_pack_v<T>;
 
 
-/// \brief checks if 2 tuples have the same type of dimensions
-template<c_tuple Pack1, c_tuple Pack2>
-struct compatible_tuple_pack
+/// \brief checks if 2 packs have the same type of dimensions
+template<core::c_pack Pack1, core::c_pack Pack2>
+struct compatible_pack
 {
 private:
-	static constexpr uintptr_t tuple1_size = std::tuple_size_v<Pack1>;
-	static constexpr uintptr_t tuple2_size = std::tuple_size_v<Pack2>;
+	static constexpr uintptr_t pack1_size = core::pack_count_v<Pack1>;
+	static constexpr uintptr_t pack2_size = core::pack_count_v<Pack2>;
 
 	template<uintptr_t Index = 0>
 	static constexpr bool match_all()
 	{
-		if constexpr (Index >= tuple1_size)
+		if constexpr (Index >= pack1_size)
 		{
 			return true;
 		}
 		else
 		{
-			using dim1 = std::tuple_element_t<Index, Pack1>;
-			using dim2 = std::tuple_element_t<Index, Pack1>;
+			using dim1 = core::pack_get_t<Pack1, Index>;
+			using dim2 = core::pack_get_t<Pack1, Index>;
 
 			if constexpr (
 				compare_equal_metric_v<typename dim1::metric_t, typename dim2::metric_t>
@@ -101,7 +101,7 @@ private:
 
 	static constexpr bool check()
 	{
-		if constexpr (tuple1_size == tuple2_size)
+		if constexpr (pack1_size == pack2_size)
 		{
 			return match_all();
 		}
@@ -117,7 +117,7 @@ public:
 
 
 template<c_unit_pack Pack1, c_unit_pack Pack2>
-using is_compatible_unit_pack = compatible_tuple_pack<typename Pack1::dimension_pack, typename Pack2::dimension_pack>;
+using is_compatible_unit_pack = compatible_pack<typename Pack1::dimension_pack, typename Pack2::dimension_pack>;
 
 template<typename Pack1, typename Pack2>
 concept c_compatible_unit_pack = is_compatible_unit_pack<Pack1, Pack2>::value;
@@ -131,30 +131,30 @@ template<typename Pack1, typename Pack2>
 concept c_weak_compatible_unit_pack = is_compatible_unit_pack<Pack1, Pack2>::value && Pack1::gauge != Pack2::gauge;
 
 
-/// \brief inverts a tuple pack with either dimension or scalar
-template<c_tuple Pack>
-struct inverse_tuple_pack
+/// \brief inverts a pack with either dimension or scalar
+template<core::c_pack Pack>
+struct inverse_pack
 {
-	using type = typename tuple_transform<invert, Pack>::type;
+	using type = typename core::pack_transform<Pack, invert>::type;
 };
 
 
-/// \brief Checks if 2 sorted tuples of dimensions have conflicting units
-/// \warning Requires tuples to be sorted
-template<c_tuple Pack1, c_tuple Pack2>
+/// \brief Checks if 2 sorted packs of dimensions have conflicting units
+/// \warning Requires packs to be sorted
+template<core::c_pack Pack1, core::c_pack Pack2>
 struct has_conflicting_units
 {
 private:
-	static constexpr uintptr_t tuple1_size = std::tuple_size_v<Pack1>;
-	static constexpr uintptr_t tuple2_size = std::tuple_size_v<Pack2>;
+	static constexpr uintptr_t pack1_size = core::pack_count_v<Pack1>;
+	static constexpr uintptr_t pack2_size = core::pack_count_v<Pack2>;
 
 	template<uintptr_t Index1 = 0, uintptr_t Index2 = 0>
 	static constexpr bool check()
 	{
-		if constexpr (Index1 < tuple1_size && Index2 < tuple2_size)
+		if constexpr (Index1 < pack1_size && Index2 < pack2_size)
 		{
-			using type1 = typename std::tuple_element_t<Index1, Pack1>;
-			using type2 = typename std::tuple_element_t<Index2, Pack2>;
+			using type1 = typename core::pack_get_t<Pack1, Index1>;
+			using type2 = typename core::pack_get_t<Pack2, Index2>;
 			if constexpr(
 				compare_equal_metric_v<typename type1::metric_t, typename type2::metric_t>
 				)
@@ -193,24 +193,24 @@ public:
 };
 
 
-/// \brief Merges 2 sorted tuple lists of dimensions, assumes that there are no conflicting units
-/// \warning Requires tuples to be sorted, and units must not conflict
-template<c_tuple Pack1, c_tuple Pack2>
+/// \brief Merges 2 sorted pack lists of dimensions, assumes that there are no conflicting units
+/// \warning Requires packs to be sorted, and units must not conflict
+template<core::c_pack Pack1, core::c_pack Pack2>
 struct dimension_merge_clober
 {
 private:
-	static constexpr uintptr_t tuple1_size = std::tuple_size_v<Pack1>;
-	static constexpr uintptr_t tuple2_size = std::tuple_size_v<Pack2>;
+	static constexpr uintptr_t pack1_size = core::pack_count_v<Pack1>;
+	static constexpr uintptr_t pack2_size = core::pack_count_v<Pack2>;
 
-	template<typename Acumulated = std::tuple<>, uintptr_t Index1 = 0, uintptr_t Index2 = 0>
+	template<typename Acumulated = core::pack<>, uintptr_t Index1 = 0, uintptr_t Index2 = 0>
 	static constexpr auto merge()
 	{
-		if constexpr (Index1 < tuple1_size)
+		if constexpr (Index1 < pack1_size)
 		{
-			if constexpr (Index2 < tuple2_size)
+			if constexpr (Index2 < pack2_size)
 			{
-				using type1 = typename std::tuple_element_t<Index1, Pack1>;
-				using type2 = typename std::tuple_element_t<Index2, Pack2>;
+				using type1 = typename core::pack_get_t<Pack1, Index1>;
+				using type2 = typename core::pack_get_t<Pack2, Index2>;
 
 				if constexpr(
 					compare_equal_metric_v<typename type1::metric_t, typename type2::metric_t>
@@ -223,10 +223,11 @@ private:
 					}
 					else
 					{
+
 						return merge<
-							decltype(
-								std::tuple_cat(std::declval<Acumulated>(),
-								std::declval<std::tuple<dimension<typename type1::standard_t, res_rank>>>()))
+							core::pack_cat_t<
+								Acumulated,
+								core::pack<dimension<typename type1::standard_t, res_rank>>>
 							, Index1 + 1, Index2 + 1>();
 					}
 				}
@@ -236,32 +237,24 @@ private:
 						compare_less_metric_v<typename type1::metric_t, typename type2::metric_t>
 						)
 					{
-						return merge<
-							decltype(
-								std::tuple_cat(std::declval<Acumulated>(),
-								std::declval<std::tuple<type1>>()))
-							, Index1 + 1, Index2>();
+						return merge<core::pack_cat_t<Acumulated, core::pack<type1>>, Index1 + 1, Index2>();
 					}
 					else
 					{
-						return merge<
-							decltype(
-								std::tuple_cat(std::declval<Acumulated>(),
-									std::declval<std::tuple<type2>>()))
-							, Index1, Index2 + 1>();
+						return merge<core::pack_cat_t<Acumulated, core::pack<type2>>, Index1, Index2 + 1>();
 					}
 				}
 			}
 			else
 			{
-				return decltype(std::tuple_cat(std::declval<Acumulated>(), std::declval<typename sub_tuple<Index1, Pack1>::type>())){};
+				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack1, Index1>>{};
 			}
 		}
 		else
 		{
-			if constexpr(Index2 < tuple2_size)
+			if constexpr(Index2 < pack2_size)
 			{
-				return decltype(std::tuple_cat(std::declval<Acumulated>(), std::declval<typename sub_tuple<Index2, Pack2>::type>())){};
+				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack2, Index2>>{};
 			}
 			else
 			{
@@ -276,24 +269,24 @@ public:
 };
 
 
-/// \brief Merges 2 sorted tuple lists of dimensions
-/// \warning Requires tuples to be sorted
-template<c_tuple Pack1, c_tuple Pack2>
+/// \brief Merges 2 sorted pack lists of dimensions
+/// \warning Requires packs to be sorted
+template<core::c_pack Pack1, core::c_pack Pack2>
 struct dimension_merge_no_clober
 {
 private:
-	static constexpr uintptr_t tuple1_size = std::tuple_size_v<Pack1>;
-	static constexpr uintptr_t tuple2_size = std::tuple_size_v<Pack2>;
+	static constexpr uintptr_t pack1_size = core::pack_count_v<Pack1>;
+	static constexpr uintptr_t pack2_size = core::pack_count_v<Pack2>;
 
-	template<typename Acumulated = std::tuple<>, uintptr_t Index1 = 0, uintptr_t Index2 = 0>
+	template<typename Acumulated = core::pack<>, uintptr_t Index1 = 0, uintptr_t Index2 = 0>
 	static constexpr auto merge()
 	{
-		if constexpr (Index1 < tuple1_size)
+		if constexpr (Index1 < pack1_size)
 		{
-			if constexpr(Index2 < tuple2_size)
+			if constexpr(Index2 < pack2_size)
 			{
-				using type1 = typename std::tuple_element_t<Index1, Pack1>;
-				using type2 = typename std::tuple_element_t<Index2, Pack2>;
+				using type1 = typename core::pack_get_t<Pack1, Index1>;
+				using type2 = typename core::pack_get_t<Pack2, Index2>;
 
 				if constexpr(
 					compare_equal_metric_v<typename type1::metric_t, typename type2::metric_t>
@@ -307,9 +300,9 @@ private:
 					else
 					{
 						return merge<
-							decltype(
-								std::tuple_cat(std::declval<Acumulated>(),
-									std::declval<std::tuple<dimension<typename type1::standard_t, res_rank>>>()))
+							core::pack_cat_t<
+								Acumulated,
+								core::pack<dimension<typename type1::standard_t, res_rank>>>
 							, Index1 + 1, Index2 + 1>();
 					}
 				}
@@ -321,32 +314,24 @@ private:
 						compare_less_metric_v<typename type1::metric_t, typename type2::metric_t>
 						)
 					{
-						return merge<
-							decltype(
-								std::tuple_cat(std::declval<Acumulated>(),
-									std::declval<std::tuple<type1>>()))
-							, Index1 + 1, Index2>();
+						return merge<core::pack_cat_t<Acumulated, core::pack<type1>>, Index1 + 1, Index2>();
 					}
 					else
 					{
-						return merge<
-							decltype(
-								std::tuple_cat(std::declval<Acumulated>(),
-									std::declval<std::tuple<type2>>()))
-							, Index1, Index2 + 1>();
+						return merge<core::pack_cat_t<Acumulated, core::pack<type2>>, Index1, Index2 + 1>();
 					}
 				}
 			}
 			else
 			{
-				return decltype(std::tuple_cat(std::declval<Acumulated>(), std::declval<typename sub_tuple<Index1, Pack1>::type>())){};
+				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack1, Index1>>{};
 			}
 		}
 		else
 		{
-			if constexpr(Index2 < tuple2_size)
+			if constexpr(Index2 < pack2_size)
 			{
-				return decltype(std::tuple_cat(std::declval<Acumulated>(), std::declval<typename sub_tuple<Index2, Pack2>::type>())){};
+				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack2, Index2>>{};
 			}
 			else
 			{
@@ -361,23 +346,23 @@ public:
 };
 
 
-/// \brief Merges 2 sorted tuple lists of scalars
-/// \warning Requires tuples to be sorted
-template<c_tuple Pack1, c_tuple Pack2>
+/// \brief Merges 2 sorted pack lists of scalars
+/// \warning Requires packs to be sorted
+template<core::c_pack Pack1, core::c_pack Pack2>
 struct scalar_merge
 {
-	static constexpr uintptr_t tuple1_size = std::tuple_size_v<Pack1>;
-	static constexpr uintptr_t tuple2_size = std::tuple_size_v<Pack2>;
+	static constexpr uintptr_t pack1_size = core::pack_count_v<Pack1>;
+	static constexpr uintptr_t pack2_size = core::pack_count_v<Pack2>;
 
-	template<typename Acumulated = std::tuple<>, uintptr_t Index1 = 0, uintptr_t Index2 = 0>
+	template<typename Acumulated = core::pack<>, uintptr_t Index1 = 0, uintptr_t Index2 = 0>
 	static constexpr auto merge()
 	{
-		if constexpr (Index1 < tuple1_size)
+		if constexpr (Index1 < pack1_size)
 		{
-			if constexpr(Index2 < tuple2_size)
+			if constexpr(Index2 < pack2_size)
 			{
-				using type1 = typename std::tuple_element_t<Index1, Pack1>;
-				using type2 = typename std::tuple_element_t<Index2, Pack2>;
+				using type1 = typename core::pack_get_t<Pack1, Index1>;
+				using type2 = typename core::pack_get_t<Pack2, Index2>;
 
 				if constexpr(type1::base_factor == type2::base_factor)
 				{
@@ -389,9 +374,9 @@ struct scalar_merge
 					else
 					{
 						return merge<
-							decltype(
-								std::tuple_cat(std::declval<Acumulated>(),
-									std::declval<std::tuple<scalar<typename type1::scalar_t, res_power>>>()))
+							core::pack_cat_t<
+							Acumulated,
+							core::pack<scalar<typename type1::scalar_t, res_power>>>
 							, Index1 + 1, Index2 + 1>();
 					}
 				}
@@ -399,32 +384,24 @@ struct scalar_merge
 				{
 					if constexpr(type1::base_factor < type2::base_factor)
 					{
-						return merge<
-							decltype(
-								std::tuple_cat(std::declval<Acumulated>(),
-									std::declval<std::tuple<type1>>()))
-							, Index1 + 1, Index2>();
+						return merge<core::pack_cat_t<Acumulated, core::pack<type1>>, Index1 + 1, Index2>();
 					}
 					else
 					{
-						return merge<
-							decltype(
-								std::tuple_cat(std::declval<Acumulated>(),
-									std::declval<std::tuple<type2>>()))
-							, Index1, Index2 + 1>();
+						return merge<core::pack_cat_t<Acumulated, core::pack<type2>>, Index1, Index2 + 1>();
 					}
 				}
 			}
 			else
 			{
-				return decltype(std::tuple_cat(std::declval<Acumulated>(), std::declval<typename sub_tuple<Index1, Pack1>::type>())){};
+				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack1, Index1>>{};
 			}
 		}
 		else
 		{
-			if constexpr(Index2 < tuple2_size)
+			if constexpr(Index2 < pack2_size)
 			{
-				return decltype(std::tuple_cat(std::declval<Acumulated>(), std::declval<typename sub_tuple<Index2, Pack2>::type>())){};
+				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack2, Index2>>{};
 			}
 			else
 			{
@@ -443,13 +420,13 @@ public:
 template<c_ValidFP value_t, c_unit_pack Pack1, c_unit_pack Pack2, c_ValidFP value_t2> requires c_compatible_unit_pack<Pack1, Pack2>
 inline constexpr value_t metric_conversion(value_t2 p_t2)
 {
-	using dim1	= typename inverse_tuple_pack<typename Pack1::dimension_pack>::type;
-	using scal1	= typename inverse_tuple_pack<typename Pack1::scalar_pack>::type;
+	using dim1	= typename inverse_pack<typename Pack1::dimension_pack>::type;
+	using scal1	= typename inverse_pack<typename Pack1::scalar_pack>::type;
 	using dim2	= typename Pack2::dimension_pack;
 	using scal2	= typename Pack2::scalar_pack;
 
-	constexpr long double scalar_factor = tuple_multiply<get_factor, typename scalar_merge<scal2, scal1>::type>::value;
-	constexpr long double conversion = tuple_multiply<get_factor, typename dimension_merge_no_clober<dim2, dim1>::type>::value * scalar_factor;
+	constexpr long double scalar_factor = pack_multiply<typename scalar_merge<scal2, scal1>::type, get_factor>::value;
+	constexpr long double conversion = pack_multiply<typename dimension_merge_no_clober<dim2, dim1>::type, get_factor>::value * scalar_factor;
 
 //	constexpr long double conversion = Pack2::gauge / Pack1::gauge;
 	return static_cast<value_t>(p_t2 * conversion);
@@ -480,45 +457,46 @@ inline constexpr auto metric_multiply(value_t1 p_t1, value_t2 p_t2)
 	using vtype = decltype(t_result);
 
 
-	using scalar_tuple = typename scalar_merge<scal1, scal2>::type;
-	constexpr long double scalar_factor = tuple_multiply<get_factor, scalar_tuple>::value;
+	using scalar_pack = typename scalar_merge<scal1, scal2>::type;
+	constexpr long double scalar_factor = pack_multiply<scalar_pack, get_factor>::value;
 
 
 	if constexpr(has_conflicting_units<dim1, dim2>::value)
 	{
-		using real_dimension_tuple = typename dimension_merge_no_clober<dim1, dim2>::type;
+		using real_dimension_pack = typename dimension_merge_no_clober<dim1, dim2>::type;
 
-		constexpr long double real_gauge = tuple_multiply<get_factor, real_dimension_tuple>::value * scalar_factor;
+		constexpr long double real_gauge = pack_multiply<real_dimension_pack, get_factor>::value * scalar_factor;
 
-		using result_dimension_tuple =
+		using result_dimension_pack =
 			typename dimension_merge_clober<
-				typename tuple_transform<standardize, dim1>::type,
-				typename tuple_transform<standardize, dim2>::type
+				typename core::pack_transform_t<dim1, standardize>,
+				typename core::pack_transform_t<dim2, standardize>
 			>::type;
 
-		if constexpr(is_tuple_empty_v<result_dimension_tuple>)
+		if constexpr(core::is_pack_empty_v<result_dimension_pack>)
 		{
 			return op_result_t<vtype, vtype>{static_cast<vtype>(t_result * real_gauge)};
 		}
 		else
 		{
-			return op_result_t<vtype, unit_pack<result_dimension_tuple, std::tuple<>>>{static_cast<vtype>(t_result * real_gauge)};
+			return op_result_t<vtype, unit_pack<result_dimension_pack, core::pack<>>>{static_cast<vtype>(t_result * real_gauge)};
 		}
 	}
 	else
 	{
-		using result_dimension_tuple =
+		using result_dimension_pack =
 			typename dimension_merge_clober<
 				dim1,
 				dim2
 			>::type;
-		if constexpr(is_tuple_empty_v<result_dimension_tuple>)
+
+		if constexpr(core::is_pack_empty_v<result_dimension_pack>)
 		{
 			return op_result_t<vtype, vtype>{static_cast<vtype>(t_result * scalar_factor)};
 		}
 		else
 		{
-			return op_result_t<vtype, unit_pack<result_dimension_tuple, scalar_tuple>>{t_result};
+			return op_result_t<vtype, unit_pack<result_dimension_pack, scalar_pack>>{t_result};
 		}
 	}
 }
@@ -528,50 +506,50 @@ inline constexpr auto metric_divide(value_t1 p_t1, value_t2 p_t2)
 {
 	using dim1	= typename Pack1::dimension_pack;
 	using scal1	= typename Pack1::scalar_pack;
-	using dim2	= typename inverse_tuple_pack<typename Pack2::dimension_pack>::type;
-	using scal2	= typename inverse_tuple_pack<typename Pack2::scalar_pack>::type;
+	using dim2	= typename inverse_pack<typename Pack2::dimension_pack>::type;
+	using scal2	= typename inverse_pack<typename Pack2::scalar_pack>::type;
 
 	auto t_result = p_t1 / p_t2;
 	using vtype = decltype(t_result);
 
-	using scalar_tuple = typename scalar_merge<scal1, scal2>::type;
-	constexpr long double scalar_factor = tuple_multiply<get_factor, scalar_tuple>::value;
+	using scalar_pack = typename scalar_merge<scal1, scal2>::type;
+	constexpr long double scalar_factor = pack_multiply<scalar_pack, get_factor>::value;
 
 	if constexpr(has_conflicting_units<dim1, dim2>::value)
 	{
-		using real_dimension_tuple = typename dimension_merge_no_clober<dim1, dim2>::type;
+		using real_dimension_pack = typename dimension_merge_no_clober<dim1, dim2>::type;
 
-		constexpr long double real_gauge = tuple_multiply<get_factor, real_dimension_tuple>::value * scalar_factor;
+		constexpr long double real_gauge = pack_multiply<real_dimension_pack, get_factor>::value * scalar_factor;
 
-		using result_dimension_tuple =
+		using result_dimension_pack =
 			typename dimension_merge_clober<
-				typename tuple_transform<standardize, dim1>::type,
-				typename tuple_transform<standardize, dim2>::type
+				typename core::pack_transform_t<dim1, standardize>,
+				typename core::pack_transform_t<dim2, standardize>
 			>::type;
 
-		if constexpr(is_tuple_empty_v<result_dimension_tuple>)
+		if constexpr(core::is_pack_empty_v<result_dimension_pack>)
 		{
 			return op_result_t<vtype, vtype>{static_cast<vtype>(t_result * real_gauge)};
 		}
 		else
 		{
-			return op_result_t<vtype, unit_pack<result_dimension_tuple, std::tuple<>>>{static_cast<vtype>(t_result * real_gauge)};
+			return op_result_t<vtype, unit_pack<result_dimension_pack, core::pack<>>>{static_cast<vtype>(t_result * real_gauge)};
 		}
 	}
 	else
 	{
-		using result_dimension_tuple =
+		using result_dimension_pack =
 			typename dimension_merge_clober<
 				dim1,
 				dim2
 			>::type;
-		if constexpr(is_tuple_empty_v<result_dimension_tuple>)
+		if constexpr(core::is_pack_empty_v<result_dimension_pack>)
 		{
 			return op_result_t<vtype, vtype>{static_cast<vtype>(t_result * scalar_factor)};
 		}
 		else
 		{
-			return op_result_t<vtype, unit_pack<result_dimension_tuple, scalar_tuple>>{t_result};
+			return op_result_t<vtype, unit_pack<result_dimension_pack, scalar_pack>>{t_result};
 		}
 	}
 }

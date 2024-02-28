@@ -35,10 +35,10 @@ namespace unit
 //======== ======== Template Type ======== ========
 
 template <_p::c_ValidFP T>
-using cubic_metre_per_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::metre, 3>, _p::dimension<standard::second, -1>>, std::tuple<>>::type;
+using cubic_metre_per_second_t = typename make_unit<T, core::pack<_p::dimension<standard::metre, 3>, _p::dimension<standard::second, -1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using cubic_foot_per_second_t = typename make_unit<T, std::tuple<_p::dimension<standard::foot, 3>, _p::dimension<standard::second, -1>>, std::tuple<>>::type;
+using cubic_foot_per_second_t = typename make_unit<T, core::pack<_p::dimension<standard::foot, 3>, _p::dimension<standard::second, -1>>, core::pack<>>::type;
 
 
 //======== ======== Default Type ======== ========

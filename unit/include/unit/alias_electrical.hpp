@@ -36,13 +36,13 @@ namespace unit
 
 //======== ======== Template Type ======== ========
 template <_p::c_ValidFP T>
-using ampere_t = typename make_unit<T, std::tuple<_p::dimension<standard::coloumb, 1>, _p::dimension<standard::second, -1>>, std::tuple<>>::type;
+using ampere_t = typename make_unit<T, core::pack<_p::dimension<standard::coloumb, 1>, _p::dimension<standard::second, -1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using volt_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, -2>, _p::dimension<standard::coloumb, -1>>, std::tuple<>>::type;
+using volt_t = typename make_unit<T, core::pack<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, -2>, _p::dimension<standard::coloumb, -1>>, core::pack<>>::type;
 
 template <_p::c_ValidFP T>
-using ohm_t = typename make_unit<T, std::tuple<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, 1>, _p::dimension<standard::coloumb, -2>>, std::tuple<>>::type;
+using ohm_t = typename make_unit<T, core::pack<_p::dimension<standard::si_mass, 1>, _p::dimension<standard::metre, 2>, _p::dimension<standard::second, 1>, _p::dimension<standard::coloumb, -2>>, core::pack<>>::type;
 
 
 //======== ======== Default Type ======== ========

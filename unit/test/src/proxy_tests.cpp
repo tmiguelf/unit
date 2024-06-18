@@ -33,7 +33,7 @@
 namespace unit
 {
 
-TEST(proxy_type, to_unit)
+TEST(offset_unit, to_unit)
 {
 	//compatible types
 	{

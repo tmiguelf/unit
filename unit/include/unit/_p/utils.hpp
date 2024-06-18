@@ -30,6 +30,8 @@
 
 namespace unit::_p
 {
+	template <class T>
+	T direct_declval() noexcept;
 
 
 	template <typename>
@@ -42,13 +44,12 @@ namespace unit::_p
 	constexpr bool is_valid_value_type_v = is_valid_value_type<Type>::value;
 
 
-
 	// \brief supported value types
 	template<typename T>
-	concept c_ValidValue = is_valid_value_type_v<T> && !std::is_const_v<T>;
+	concept c_ValidValue = is_valid_value_type_v<T> && !std::is_const_v<T> && !std::is_volatile_v<T>;
 
 	template<typename T>
-	concept c_ValidFP = std::is_floating_point_v<T> && !std::is_const_v<T>;
+	concept c_ValidFP = std::is_floating_point_v<T> && !std::is_const_v<T> && !std::is_volatile_v<T>;
 
 	template<typename T>
 	concept c_arithmethic = std::is_arithmetic_v<T>;

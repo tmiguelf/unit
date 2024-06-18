@@ -247,18 +247,18 @@ private:
 			}
 			else
 			{
-				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack1, Index1>>{};
+				return direct_declval<core::pack_cat_t<Acumulated, core::sub_pack_t<Pack1, Index1>>>();
 			}
 		}
 		else
 		{
 			if constexpr(Index2 < pack2_size)
 			{
-				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack2, Index2>>{};
+				return direct_declval<core::pack_cat_t<Acumulated, core::sub_pack_t<Pack2, Index2>>>();
 			}
 			else
 			{
-				return Acumulated{};
+				return direct_declval<Acumulated>();
 			}
 		}
 	}
@@ -324,18 +324,18 @@ private:
 			}
 			else
 			{
-				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack1, Index1>>{};
+				return direct_declval<core::pack_cat_t<Acumulated, core::sub_pack_t<Pack1, Index1>>>();
 			}
 		}
 		else
 		{
 			if constexpr(Index2 < pack2_size)
 			{
-				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack2, Index2>>{};
+				return direct_declval<core::pack_cat_t<Acumulated, core::sub_pack_t<Pack2, Index2>>>();
 			}
 			else
 			{
-				return Acumulated{};
+				return direct_declval<Acumulated>();
 			}
 		}
 	}
@@ -394,18 +394,18 @@ struct scalar_merge
 			}
 			else
 			{
-				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack1, Index1>>{};
+				return direct_declval<core::pack_cat_t<Acumulated, core::sub_pack_t<Pack1, Index1>>>();
 			}
 		}
 		else
 		{
 			if constexpr(Index2 < pack2_size)
 			{
-				return core::pack_cat_t<Acumulated, core::sub_pack_t<Pack2, Index2>>{};
+				return direct_declval<core::pack_cat_t<Acumulated, core::sub_pack_t<Pack2, Index2>>>();
 			}
 			else
 			{
-				return Acumulated{};
+				return direct_declval<Acumulated>();
 			}
 		}
 	}

@@ -24,7 +24,6 @@
 //======== ======== ======== ======== ======== ======== ======== ========
 
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 
 #include <type_traits>
 #include <limits>
@@ -377,7 +376,7 @@ TEST(type_conversion, add_assign)
 		constexpr long double val2 = 4.1;
 
 		std::remove_cv_t<decltype(val1)> val_expect = val1;
-		val_expect += static_cast<decltype(val1)>(val2 * 5280. * 5280. / 4096.);
+		val_expect += static_cast<float>(val2 * 5280. * 5280. / 4096.);
 
 		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
 		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, 2>, _p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
@@ -416,7 +415,7 @@ TEST(type_conversion, subtract_assign)
 		constexpr long double val2 = 4.1;
 
 		std::remove_cv_t<decltype(val1)> val_expect = val1;
-		val_expect -= static_cast<decltype(val1)>(val2 * 5280. * 5280. / 4096.);
+		val_expect -= static_cast<float>(val2 * 5280. * 5280. / 4096.);
 
 		using type1_test_t = typename make_unit<std::remove_cv_t<decltype(val1)>, core::pack<_p::dimension<standard::foot, 2>, _p::dimension<standard::ounce_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;
 		using type2_test_t = typename make_unit<std::remove_cv_t<decltype(val2)>, core::pack<_p::dimension<standard::mile, 2>, _p::dimension<standard::pound_av, -3>, _p::dimension<standard::rankine, 1>>, core::pack<>>::type;

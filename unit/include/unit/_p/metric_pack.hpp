@@ -44,16 +44,13 @@ public:
 	static_assert(!core::pack_contains_v<dimension_pack, not_dimension>, "Dimension pack can only contain dimensions");
 	static_assert(!core::pack_contains_v<scalar_pack, not_scalar>, "Scalar pack can only contain scalars");
 
-	static_assert(is_pack_strictly_sorted<dimension_pack, less>::value, "Dimension must be packed and sorted");
-	static_assert(is_pack_strictly_sorted<scalar_pack, less>::value, "Scalar must be packed and sorted");
+	static_assert(is_pack_sorted<dimension_pack, less>::value, "Dimension must be packed and sorted");
+	static_assert(is_pack_sorted<scalar_pack, less>::value, "Scalar must be packed and sorted");
 
 	static_assert(core::pack_count_v<dimension_pack> != 0, "Dimension pack must not be empty");
 
 	static constexpr long double gauge = pack_multiply<dimension_pack, get_factor>::value * pack_multiply<scalar_pack, get_factor>::value;
 };
-
-
-
 
 
 template<typename> struct is_unit_pack : public std::false_type {};

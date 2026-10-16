@@ -1,0 +1,26 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Release" />
+    <BuildType Name="WSL_Debug" />
+    <BuildType Name="WSL_Release" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="submodules/googletest/googlemock/googlemock.vcxproj">
+    <Deploy Solution="WSL_Debug|*" />
+    <Deploy Solution="WSL_Release|*" />
+  </Project>
+  <Project Path="submodules/googletest/googletest/googletest.vcxproj">
+    <Deploy Solution="WSL_Debug|*" />
+    <Deploy Solution="WSL_Release|*" />
+  </Project>
+  <Project Path="submodules/utilities/MathLib/MathLib.vcxproj">
+    <Deploy Solution="WSL_Debug|*" />
+    <Deploy Solution="WSL_Release|*" />
+  </Project>
+  <Project Path="unit/test/unit_test.vcxproj">
+    <Deploy Solution="WSL_Debug|*" />
+    <Deploy Solution="WSL_Release|*" />
+  </Project>
+  <Project Path="unit/unit.vcxproj" />
+</Solution>

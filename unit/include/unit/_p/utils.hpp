@@ -89,7 +89,6 @@ namespace unit::_p
 	private:
 		static constexpr uintptr_t pack_size = core::pack_count_v<Pack_t>;
 
-
 		template <core::c_pack LoopPack, std::uintptr_t i, std::uintptr_t j>
 		struct pack_selection_sort_impl
 		{
@@ -123,7 +122,7 @@ namespace unit::_p
 
 	/// \brief checks if types in a pack are strictly sorted (i.e sorted with no repeated elements)
 	template <core::c_pack Pack_t, template <typename, typename> typename Comparator>
-	struct is_pack_strictly_sorted
+	struct is_pack_sorted
 	{
 	private:
 		static constexpr uintptr_t pack_size = core::pack_count_v<Pack_t>;

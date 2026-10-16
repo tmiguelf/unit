@@ -24,7 +24,6 @@
 //======== ======== ======== ======== ======== ======== ======== ========
 
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 
 #include <unit/alias_temperature.hpp>
 
@@ -38,7 +37,7 @@ TEST(offset_unit, to_unit)
 	//compatible types
 	{
 		constexpr double val = 4.1;
-		constexpr double val_expect = static_cast<decltype(val)>(val + 459.67l);
+		constexpr double val_expect = static_cast<double>(val + 459.67l);
 
 		using test_t			= fahrenheit_t<std::remove_const_t<decltype(val)>>;
 		using expected_type_t	= rankine_t<std::remove_const_t<decltype(val_expect)>>;

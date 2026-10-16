@@ -74,7 +74,7 @@ public:
 
 	template<c_ValidFP Type2, c_proxy_property Prop2> requires
 		(!std::is_same_v<Property, Prop2> && (
-			compare_equal_metric_v<Property::standard_t::metric_t, Prop2::standard_t::metric_t>
+			compare_equal_metric_v<typename Property::standard_t::metric_t, typename Prop2::standard_t::metric_t>
 			//Property::standard_t::id == Prop2::standard_t::id
 			))
 	inline constexpr Offset_Unit(const Offset_Unit<Type2, Prop2>& p_other)
@@ -141,7 +141,7 @@ public:
 
 	template<c_ValidFP Type2, c_proxy_property Prop2> requires
 		(!std::is_same_v<Property, Prop2> && (
-			compare_equal_metric_v<Property::standard_t::metric_t, Prop2::standard_t::metric_t>
+			compare_equal_metric_v<typename Property::standard_t::metric_t, typename Prop2::standard_t::metric_t>
 			//Property::standard_t::id == Prop2::standard_t::id
 			))
 	inline constexpr auto operator - (const Offset_Unit<Type2, Prop2>& p_other) const
